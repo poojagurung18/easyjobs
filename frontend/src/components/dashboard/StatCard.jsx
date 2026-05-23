@@ -17,11 +17,11 @@ export function StatCard({ label, value, icon: Icon, color }) {
   const currentColorClass = colorClasses[color] || colorClasses.blue;
 
   return (
-    <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm transition-all hover:shadow-md">
+    <div className="rounded-xl border border-border bg-surface p-5 shadow-sm transition-all hover:shadow-md">
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm font-medium text-gray-600">{label}</p>
-          <p className="mt-1 text-2xl font-bold text-gray-900">{value}</p>
+          <p className="text-sm font-medium text-secondary">{label}</p>
+          <p className="mt-1 text-2xl font-bold text-foreground">{value}</p>
         </div>
         <div className={`rounded-xl p-3 ${currentColorClass}`}>
           <Icon size={24} />

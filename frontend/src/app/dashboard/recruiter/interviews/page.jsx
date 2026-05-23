@@ -25,7 +25,7 @@ import Link from "next/link";
 export default function RecruiterInterviews() {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const [rescheduleModal, setRescheduleModal] = useState(null); // application object
+  const [rescheduleModal, setRescheduleModal] = useState(null);
   const [newInterviewDate, setNewInterviewDate] = useState("");
   const [isStartingChat, setIsStartingChat] = useState(false);
 
@@ -54,12 +54,12 @@ export default function RecruiterInterviews() {
       setIsStartingChat(true);
       const seekerUserId = app.seeker?.user?.id || app.userId || app.seekerId || app.user?.id;
       const jobId = app.job?.id || app.jobId;
-      
+
       if (!seekerUserId || !jobId) {
-         toast.error("Missing applicant or job information");
-         return;
+        toast.error("Missing applicant or job information");
+        return;
       }
-      
+
       const room = await getOrCreateChatRoom(seekerUserId, jobId);
       router.push(`/dashboard/recruiter/chat?roomId=${room.id}`);
     } catch (error) {
@@ -95,57 +95,53 @@ export default function RecruiterInterviews() {
     );
   }
 
-  const rawApplications = Array.isArray(applications)
-    ? applications
-    : applications?.data || [];
-
-  // Filter for applications in "SHORTLISTED" status, representing our scheduled interviews
+  const rawApplications = Array.isArray(applications) ? applications : applications?.data || [];
   const interviewsList = rawApplications.filter(
-    (app) => app.status === "SHORTLISTED" && app.interviewDate
+    (app) => app.status === "SHORTLISTED" && app.interviewDate,
   );
 
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-white">Interviews & Candidates</h1>
-        <p className="text-gray-400">Track scheduled slots, communicate, and manage hiring decisions.</p>
+        <h1 className="text-2xl font-bold text-foreground">Interviews & Candidates</h1>
+        <p className="text-secondary">Track scheduled slots, communicate, and manage hiring decisions.</p>
       </div>
 
-      <div className="bg-[#0b121f] rounded-xl border border-gray-100/10 p-6 shadow-xl">
-        <h2 className="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+      <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
+        <h2 className="text-lg font-semibold text-foreground mb-4 flex items-center gap-2">
           <Calendar className="text-brand-primary h-5 w-5" />
           Active Interview Schedules ({interviewsList.length})
         </h2>
 
         {interviewsList.length > 0 ? (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-sm text-gray-300">
-              <thead className="bg-[#060b13] text-gray-400 uppercase text-xs tracking-wider border-b border-gray-200/10">
-                <tr>
-                  <th className="px-6 py-4 rounded-tl-xl">Candidate</th>
+            <table className="w-full text-left text-sm">
+              <thead className="border-b border-border">
+                <tr className="text-xs uppercase tracking-wider text-muted">
+                  <th className="px-6 py-4">Candidate</th>
                   <th className="px-6 py-4">Job Title</th>
                   <th className="px-6 py-4">Contact Details</th>
                   <th className="px-6 py-4">Scheduled Slot</th>
                   <th className="px-6 py-4">Resume</th>
-                  <th className="px-6 py-4 rounded-tr-xl text-right">Actions</th>
+                  <th className="px-6 py-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-200/5">
+              <tbody className="divide-y divide-border">
                 {interviewsList.map((app) => {
                   const applicantName = app.seeker?.user?.name || "Applicant";
                   const applicantEmail = app.seeker?.user?.email || "N/A";
                   const applicantPhone = app.seeker?.phoneNumber || app.seeker?.phone || "N/A";
                   const jobTitle = app.job?.title || "Unknown Job";
-                  
+
                   return (
-                    <tr key={app.id} className="hover:bg-[#111a2e] transition-colors">
+                    <tr key={app.id} className="hover:bg-surface-hover transition-colors">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center gap-3">
                           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-brand-primary/10 text-brand-primary font-bold border border-brand-primary/20">
                             {applicantName.charAt(0)}
                           </div>
                           <div>
-                            <div className="font-semibold text-white">{applicantName}</div>
+                            <div className="font-semibold text-foreground">{applicantName}</div>
                             <span className="inline-flex rounded-full bg-brand-primary/10 text-brand-primary px-2.5 py-0.5 text-xs font-semibold mt-1">
                               Shortlisted
                             </span>
@@ -153,20 +149,20 @@ export default function RecruiterInterviews() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <div className="flex items-center gap-2 text-white font-medium">
-                          <Briefcase size={16} className="text-gray-500" />
+                        <div className="flex items-center gap-2 text-foreground font-medium">
+                          <Briefcase size={16} className="text-muted" />
                           {jobTitle}
                         </div>
                       </td>
                       <td className="px-6 py-4">
                         <div className="space-y-1 text-xs">
-                          <div className="flex items-center gap-1.5 text-gray-300">
-                            <Mail size={12} className="text-gray-500" />
+                          <div className="flex items-center gap-1.5 text-secondary">
+                            <Mail size={12} className="text-muted" />
                             {applicantEmail}
                           </div>
                           {applicantPhone !== "N/A" && (
-                            <div className="flex items-center gap-1.5 text-gray-300">
-                              <Phone size={12} className="text-gray-500" />
+                            <div className="flex items-center gap-1.5 text-secondary">
+                              <Phone size={12} className="text-muted" />
                               {applicantPhone}
                             </div>
                           )}
@@ -198,7 +194,7 @@ export default function RecruiterInterviews() {
                             <ExternalLink size={10} />
                           </a>
                         ) : (
-                          <span className="text-gray-500 text-xs italic">No Resume</span>
+                          <span className="text-muted text-xs italic">No Resume</span>
                         )}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-right">
@@ -206,7 +202,7 @@ export default function RecruiterInterviews() {
                           <button
                             onClick={() => handleMessageApplicant(app)}
                             disabled={isStartingChat}
-                            className="p-2 rounded-lg bg-gray-800 text-gray-300 hover:bg-gray-700 hover:text-white transition-colors"
+                            className="p-2 rounded-lg bg-surface-hover text-secondary hover:bg-border hover:text-foreground transition-colors"
                             title="Chat with Seeker"
                           >
                             <MessageSquare size={16} />
@@ -214,7 +210,9 @@ export default function RecruiterInterviews() {
                           <button
                             onClick={() => {
                               setRescheduleModal(app);
-                              setNewInterviewDate(app.interviewDate ? app.interviewDate.substring(0, 16) : "");
+                              setNewInterviewDate(
+                                app.interviewDate ? app.interviewDate.substring(0, 16) : "",
+                              );
                             }}
                             className="px-3 py-1.5 rounded-lg border border-brand-primary/20 text-brand-primary hover:bg-brand-primary hover:text-white transition-all text-xs font-medium"
                           >
@@ -226,7 +224,7 @@ export default function RecruiterInterviews() {
                                 updateStatusMutation.mutate({ id: app.id, status: "ACCEPTED" });
                               }
                             }}
-                            className="p-2 rounded-lg bg-emerald-500/10 text-emerald-400 hover:bg-emerald-50 hover:text-white border border-emerald-500/20 transition-all"
+                            className="p-2 rounded-lg bg-emerald-500/10 text-emerald-600 hover:bg-emerald-100 border border-emerald-500/20 transition-all"
                             title="Hire Candidate"
                           >
                             <CheckCircle size={16} />
@@ -237,7 +235,7 @@ export default function RecruiterInterviews() {
                                 updateStatusMutation.mutate({ id: app.id, status: "REJECTED" });
                               }
                             }}
-                            className="p-2 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-50 hover:text-white border border-red-500/20 transition-all"
+                            className="p-2 rounded-lg bg-red-500/10 text-red-600 hover:bg-red-100 border border-red-500/20 transition-all"
                             title="Reject Candidate"
                           >
                             <XCircle size={16} />
@@ -252,11 +250,11 @@ export default function RecruiterInterviews() {
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-12 text-center">
-            <div className="h-16 w-16 rounded-full bg-gray-800 flex items-center justify-center mb-4">
-              <Calendar className="h-8 w-8 text-gray-500" />
+            <div className="h-16 w-16 rounded-full bg-surface-hover flex items-center justify-center mb-4">
+              <Calendar className="h-8 w-8 text-muted" />
             </div>
-            <h3 className="text-lg font-semibold text-white mb-1">No Upcoming Interviews</h3>
-            <p className="text-gray-400 max-w-sm">
+            <h3 className="text-lg font-semibold text-foreground mb-1">No Upcoming Interviews</h3>
+            <p className="text-secondary max-w-sm">
               Candidates will appear here once you shortlist their applications and set an interview date.
             </p>
             <Link
@@ -273,9 +271,9 @@ export default function RecruiterInterviews() {
       {/* Reschedule Modal */}
       {rescheduleModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-md rounded-2xl bg-[#0b121f] border border-gray-100/10 p-6 shadow-2xl animate-in zoom-in-95 duration-200">
-            <h3 className="text-lg font-bold text-white mb-2">Reschedule Interview</h3>
-            <p className="text-sm text-gray-400 mb-4">
+          <div className="w-full max-w-md rounded-2xl bg-surface border border-border p-6 shadow-2xl animate-in zoom-in-95 duration-200">
+            <h3 className="text-lg font-bold text-foreground mb-2">Reschedule Interview</h3>
+            <p className="text-sm text-secondary mb-4">
               Select a new date and time for your interview with{" "}
               <span className="text-brand-primary font-semibold">
                 {rescheduleModal.seeker?.user?.name}
@@ -284,7 +282,7 @@ export default function RecruiterInterviews() {
 
             <div className="space-y-4">
               <div>
-                <label className="block text-sm font-medium text-gray-300 mb-1.5">
+                <label className="block text-sm font-medium text-secondary mb-1.5">
                   New Interview Date & Time
                 </label>
                 <input
@@ -292,15 +290,15 @@ export default function RecruiterInterviews() {
                   value={newInterviewDate}
                   min={new Date().toISOString().substring(0, 16)}
                   onChange={(e) => setNewInterviewDate(e.target.value)}
-                  className="w-full rounded-xl border border-gray-200/10 bg-[#060b13] text-white px-4 py-3 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20 transition-all text-sm"
+                  className="w-full rounded-xl border border-border bg-background text-foreground px-4 py-3 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20 transition-all text-sm"
                 />
               </div>
 
-              <div className="flex items-center justify-end gap-3 pt-4 border-t border-gray-200/10">
+              <div className="flex items-center justify-end gap-3 pt-4 border-t border-border">
                 <button
                   type="button"
                   onClick={() => setRescheduleModal(null)}
-                  className="rounded-xl px-4 py-2.5 text-sm font-medium text-gray-400 hover:bg-gray-800 transition-colors"
+                  className="rounded-xl px-4 py-2.5 text-sm font-medium text-secondary hover:bg-surface-hover transition-colors"
                 >
                   Cancel
                 </button>
@@ -310,9 +308,7 @@ export default function RecruiterInterviews() {
                   disabled={updateStatusMutation.isPending}
                   className="flex items-center gap-2 rounded-xl bg-brand-primary px-5 py-2.5 text-sm font-semibold text-white hover:bg-brand-primary-hover disabled:opacity-50 transition-colors shadow-lg shadow-brand-primary/20"
                 >
-                  {updateStatusMutation.isPending && (
-                    <Loader2 className="h-4 w-4 animate-spin" />
-                  )}
+                  {updateStatusMutation.isPending && <Loader2 className="h-4 w-4 animate-spin" />}
                   Update Slot
                 </button>
               </div>

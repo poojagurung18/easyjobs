@@ -22,7 +22,7 @@ export default function ReportedRecruitersPage() {
   const [confirmConfig, setConfirmConfig] = useState({
     isOpen: false,
     id: null,
-    type: "reset", // reset, delete, block
+    type: "reset",
   });
 
   const { data: reportedRecruiters, isLoading } = useQuery({
@@ -62,9 +62,7 @@ export default function ReportedRecruitersPage() {
       setConfirmConfig({ isOpen: false, id: null, type: "delete" });
     },
     onError: (error) => {
-      toast.error(
-        error.response?.data?.message || "Failed to delete recruiter",
-      );
+      toast.error(error.response?.data?.message || "Failed to delete recruiter");
     },
   });
 
@@ -74,17 +72,15 @@ export default function ReportedRecruitersPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
-            Reported Recruiters
-          </h1>
-          <p className="text-gray-600">Manage recruiters with user reports</p>
+          <h1 className="text-2xl font-bold text-foreground">Reported Recruiters</h1>
+          <p className="text-secondary">Manage recruiters with user reports</p>
         </div>
         <div className="flex items-center gap-2">
-          <label className="text-sm text-gray-600">Min reports:</label>
+          <label className="text-sm text-secondary">Min reports:</label>
           <select
             value={minReports}
             onChange={(e) => setMinReports(Number(e.target.value))}
-            className="rounded-lg border border-gray-300 px-3 py-2 text-sm"
+            className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground"
           >
             <option value={1}>1+</option>
             <option value={5}>5+</option>
@@ -99,41 +95,29 @@ export default function ReportedRecruitersPage() {
           <Loader2 className="h-8 w-8 animate-spin text-brand-primary" />
         </div>
       ) : list.length > 0 ? (
-        <div className="rounded-xl border border-gray-200 bg-white">
+        <div className="rounded-xl border border-border bg-surface">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead>
-                <tr className="border-b border-gray-200">
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
-                    Company
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
-                    Email
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
-                    Reports
-                  </th>
-                  <th className="px-6 py-3 text-left text-sm font-medium text-gray-600">
-                    Actions
-                  </th>
+                <tr className="border-b border-border">
+                  <th className="px-6 py-3 text-left text-sm font-medium text-secondary">Company</th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-secondary">Email</th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-secondary">Reports</th>
+                  <th className="px-6 py-3 text-left text-sm font-medium text-secondary">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-border">
                 {list.map((recruiter) => (
-                  <tr key={recruiter.userId} className="hover:bg-white">
+                  <tr key={recruiter.userId} className="hover:bg-surface-hover">
                     <td className="px-6 py-4">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-200">
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-surface-hover">
                           <Building2 size={20} className="text-brand-primary" />
                         </div>
-                        <span className="font-medium">
-                          {recruiter.companyName || "N/A"}
-                        </span>
+                        <span className="font-medium text-foreground">{recruiter.companyName || "N/A"}</span>
                       </div>
                     </td>
-                    <td className="px-6 py-4 text-sm text-gray-600">
-                      {recruiter.companyEmail || "N/A"}
-                    </td>
+                    <td className="px-6 py-4 text-sm text-secondary">{recruiter.companyEmail || "N/A"}</td>
                     <td className="px-6 py-4">
                       <span
                         className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-medium ${
@@ -186,14 +170,10 @@ export default function ReportedRecruitersPage() {
           </div>
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-200 bg-white p-12 text-center">
+        <div className="rounded-xl border border-border bg-surface p-12 text-center">
           <CheckCircle className="mx-auto h-12 w-12 text-green-400" />
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
-            No reported recruiters
-          </h3>
-          <p className="mt-1 text-gray-500">
-            All recruiters are in good standing.
-          </p>
+          <h3 className="mt-4 text-lg font-medium text-foreground">No reported recruiters</h3>
+          <p className="mt-1 text-secondary">All recruiters are in good standing.</p>
         </div>
       )}
 

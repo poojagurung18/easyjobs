@@ -147,7 +147,7 @@ export default function RecruiterJobs() {
 
                 {/* Metadata Badges */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="flex items-center gap-1.5 rounded-lg bg-surface-hover px-2.5 py-1.5 text-xs font-medium text-slate-600 border border-border">
+                  <span className="flex items-center gap-1.5 rounded-lg bg-surface-hover px-2.5 py-1.5 text-xs font-medium text-secondary border border-border">
                     <MapPin size={14} className="text-brand-accent" />
                     {job.location}
                   </span>
@@ -156,14 +156,14 @@ export default function RecruiterJobs() {
                 {/* Details Grid */}
                 <div className="grid grid-cols-2 gap-4 py-4 border-t border-border">
                   <div className="space-y-1">
-                    <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Hirings</p>
-                    <div className="flex items-center gap-1.5 text-sm font-bold text-slate-700">
+                    <p className="text-[10px] uppercase tracking-wider text-muted font-bold">Hirings</p>
+                    <div className="flex items-center gap-1.5 text-sm font-bold text-foreground">
                       <Users size={14} className="text-blue-500" />
                       {job.noOfOpenings || 1} Positions
                     </div>
                   </div>
                   <div className="space-y-1">
-                    <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Deadline</p>
+                    <p className="text-[10px] uppercase tracking-wider text-muted font-bold">Deadline</p>
                     <div className="flex items-center gap-1.5 text-sm font-bold text-red-600">
                       <Clock size={14} className="text-red-500" />
                       {job.deadline || "Soon"}
@@ -174,7 +174,7 @@ export default function RecruiterJobs() {
                 {/* Required Documents Section (if any) */}
                 {job.requiredDocuments && job.requiredDocuments.length > 0 && (
                   <div className="mt-4 pt-4 border-t border-border">
-                    <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-2">Required Documents</p>
+                    <p className="text-[10px] uppercase tracking-wider text-muted font-bold mb-2">Required Documents</p>
                     <div className="flex flex-wrap gap-1.5">
                       {job.requiredDocuments.map((doc, idx) => (
                         <span key={idx} className="inline-flex items-center rounded-md bg-brand-light/40 px-2 py-0.5 text-[10px] font-bold text-brand-primary border border-brand-primary/10">

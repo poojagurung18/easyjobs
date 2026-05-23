@@ -298,7 +298,7 @@ export default function RecruiterApplications() {
                   const minutes = String(now.getMinutes()).padStart(2, "0");
                   return `${year}-${month}-${day}T${hours}:${minutes}`;
                 })()}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background text-foreground px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
               />
             </div>
             <div className="mt-6 flex justify-end gap-3">
@@ -307,7 +307,7 @@ export default function RecruiterApplications() {
                   setInterviewModal(null);
                   setInterviewDate("");
                 }}
-                className="rounded-lg border border-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50"
+                className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-secondary hover:bg-surface-hover"
               >
                 Cancel
               </button>

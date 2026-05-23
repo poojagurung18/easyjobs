@@ -20,7 +20,6 @@ import {
   Briefcase,
   FileText,
   User,
-  CheckCircle,
   Clock,
 } from "lucide-react";
 import toast from "react-hot-toast";
@@ -32,11 +31,7 @@ const profileSchema = z.object({
   companyEmail: z.string().email("Valid company email is required"),
   contactPerson: z.string().min(2, "Contact person name is required"),
   phoneNumber: z.string().min(10, "Valid phone number is required"),
-  companyWebsite: z
-    .string()
-    .url("Valid website URL is required")
-    .optional()
-    .or(z.literal("")),
+  companyWebsite: z.string().url("Valid website URL is required").optional().or(z.literal("")),
   companyAddress: z.string().min(5, "Address is required"),
   industryType: z.string().min(1, "Industry type is required"),
   panNumber: z.string().min(10, "Valid PAN number is required"),
@@ -90,9 +85,7 @@ export default function RecruiterProfile() {
     setValue,
   } = useForm({
     resolver: zodResolver(profileSchema),
-    defaultValues: {
-      description: "",
-    },
+    defaultValues: { description: "" },
     values: profile || {},
   });
 
@@ -138,16 +131,13 @@ export default function RecruiterProfile() {
     );
   }
 
-  // ─── Detail View ────────────────────────────────────────────────────
   if (hasProfile && !isEditing) {
     return (
       <div className="space-y-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-              Company Profile
-            </h1>
-            <p className="text-gray-600">Your company information</p>
+            <h1 className="text-2xl font-bold text-foreground">Company Profile</h1>
+            <p className="text-secondary">Your company information</p>
           </div>
           <button
             onClick={() => setIsEditing(true)}
@@ -163,9 +153,7 @@ export default function RecruiterProfile() {
             <div className="flex items-center gap-3">
               <Clock className="h-5 w-5 text-blue-600" />
               <div>
-                <p className="font-medium text-blue-800">
-                  Account Under Verification
-                </p>
+                <p className="font-medium text-blue-800">Account Under Verification</p>
                 <p className="text-sm text-blue-700">
                   Your profile has been submitted and is currently under manual verification by our team.
                 </p>
@@ -174,25 +162,22 @@ export default function RecruiterProfile() {
           </div>
         )}
 
-        {/* Header card */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
+        <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
           <div className="flex items-center gap-5">
             {profile.logoUrl ? (
               <img
                 src={profile.logoUrl}
                 alt={profile.companyName}
-                className="h-20 w-20 rounded-xl object-cover border border-gray-100 shadow-sm"
+                className="h-20 w-20 rounded-xl object-cover border border-border shadow-sm"
               />
             ) : (
-              <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-gray-100">
-                <Building2 className="h-10 w-10 text-gray-400" />
+              <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-surface-hover">
+                <Building2 className="h-10 w-10 text-muted" />
               </div>
             )}
             <div>
-              <h2 className="text-xl font-bold text-gray-900">
-                {profile.companyName}
-              </h2>
-              <p className="text-sm text-gray-500">{profile.industryType}</p>
+              <h2 className="text-xl font-bold text-foreground">{profile.companyName}</h2>
+              <p className="text-sm text-secondary">{profile.industryType}</p>
               {profile.companyWebsite && (
                 <a
                   href={profile.companyWebsite}
@@ -208,47 +193,20 @@ export default function RecruiterProfile() {
           </div>
         </div>
 
-        {/* Info grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-          <InfoCard
-            icon={Mail}
-            label="Company Email"
-            value={profile.companyEmail}
-          />
-          <InfoCard
-            icon={User}
-            label="Contact Person"
-            value={profile.contactPerson}
-          />
-          <InfoCard
-            icon={Phone}
-            label="Phone Number"
-            value={profile.phoneNumber}
-          />
-          <InfoCard
-            icon={MapPin}
-            label="Address"
-            value={profile.companyAddress}
-          />
-          <InfoCard
-            icon={Briefcase}
-            label="Industry"
-            value={profile.industryType}
-          />
-          <InfoCard
-            icon={FileText}
-            label="PAN Number"
-            value={profile.panNumber}
-          />
+          <InfoCard icon={Mail} label="Company Email" value={profile.companyEmail} />
+          <InfoCard icon={User} label="Contact Person" value={profile.contactPerson} />
+          <InfoCard icon={Phone} label="Phone Number" value={profile.phoneNumber} />
+          <InfoCard icon={MapPin} label="Address" value={profile.companyAddress} />
+          <InfoCard icon={Briefcase} label="Industry" value={profile.industryType} />
+          <InfoCard icon={FileText} label="PAN Number" value={profile.panNumber} />
         </div>
 
-        {/* Description */}
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-gray-400">
+        <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
+          <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted">
             About the Company
           </p>
-
-          <div className="text-sm leading-relaxed text-gray-700">
+          <div className="text-sm leading-relaxed text-secondary">
             <ContentRenderer content={profile.description} />
           </div>
         </div>
@@ -256,24 +214,21 @@ export default function RecruiterProfile() {
     );
   }
 
-  // ─── Create / Edit Form ──────────────────────────────────────────────
   return (
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">
+          <h1 className="text-2xl font-bold text-foreground">
             {hasProfile ? "Edit Profile" : "Company Profile"}
           </h1>
-          <p className="text-gray-600">
-            {hasProfile
-              ? "Update your company information"
-              : "Set up your company information"}
+          <p className="text-secondary">
+            {hasProfile ? "Update your company information" : "Set up your company information"}
           </p>
         </div>
         {hasProfile && (
           <button
             onClick={handleCancelEdit}
-            className="flex items-center gap-2 rounded-lg border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 transition-colors"
+            className="flex items-center gap-2 rounded-lg border border-border bg-surface px-4 py-2 text-sm font-medium text-secondary hover:bg-surface-hover transition-colors"
           >
             <X size={15} />
             Cancel
@@ -282,8 +237,7 @@ export default function RecruiterProfile() {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-        <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-          {/* Logo Upload */}
+        <div className="rounded-xl border border-border bg-surface p-6 shadow-sm">
           <div className="mb-6 flex items-center gap-4">
             <div className="relative">
               {logoPreview || profile?.logoUrl ? (
@@ -293,33 +247,27 @@ export default function RecruiterProfile() {
                   className="h-24 w-24 rounded-lg object-cover"
                 />
               ) : (
-                <div className="flex h-24 w-24 items-center justify-center rounded-lg bg-gray-100">
-                  <Building2 className="h-10 w-10 text-gray-400" />
+                <div className="flex h-24 w-24 items-center justify-center rounded-lg bg-surface-hover">
+                  <Building2 className="h-10 w-10 text-muted" />
                 </div>
               )}
               <label className="absolute -bottom-2 -right-2 cursor-pointer rounded-full bg-brand-primary p-2 text-white shadow-lg hover:bg-brand-primary-hover">
                 <Upload size={14} />
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleLogoChange}
-                  className="hidden"
-                />
+                <input type="file" accept="image/*" onChange={handleLogoChange} className="hidden" />
               </label>
             </div>
             <div>
-              <p className="font-medium text-gray-900">Company Logo</p>
-              <p className="text-sm text-gray-500">Upload your company logo</p>
+              <p className="font-medium text-foreground">Company Logo</p>
+              <p className="text-sm text-secondary">Upload your company logo</p>
             </div>
           </div>
 
-          {/* Fields */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
             <FormField label="Company Name" error={errors.companyName}>
               <input
                 type="text"
                 {...register("companyName")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="Acme Inc."
               />
             </FormField>
@@ -328,7 +276,7 @@ export default function RecruiterProfile() {
               <input
                 type="email"
                 {...register("companyEmail")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="hr@acme.com"
               />
             </FormField>
@@ -337,7 +285,7 @@ export default function RecruiterProfile() {
               <input
                 type="text"
                 {...register("contactPerson")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="John Doe"
               />
             </FormField>
@@ -346,7 +294,7 @@ export default function RecruiterProfile() {
               <input
                 type="tel"
                 {...register("phoneNumber")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="+1 234 567 8900"
               />
             </FormField>
@@ -355,7 +303,7 @@ export default function RecruiterProfile() {
               <input
                 type="url"
                 {...register("companyWebsite")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="https://acme.com"
               />
             </FormField>
@@ -363,7 +311,7 @@ export default function RecruiterProfile() {
             <FormField label="Industry Type" error={errors.industryType}>
               <select
                 {...register("industryType")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
               >
                 <option value="">Select Industry</option>
                 <option value="Technology">Technology</option>
@@ -380,7 +328,7 @@ export default function RecruiterProfile() {
               <input
                 type="text"
                 {...register("panNumber")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="ABCDE1234F"
               />
             </FormField>
@@ -389,7 +337,7 @@ export default function RecruiterProfile() {
               <input
                 type="text"
                 {...register("companyAddress")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="123 Business St, City, Country"
               />
             </FormField>
@@ -413,11 +361,7 @@ export default function RecruiterProfile() {
             disabled={isPending}
             className="flex items-center gap-2 rounded-lg bg-brand-accent px-6 py-2.5 text-sm font-medium text-white hover:bg-brand-accent-hover disabled:opacity-50"
           >
-            {isPending ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <Save size={16} />
-            )}
+            {isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save size={16} />}
             {hasProfile ? "Update Profile" : "Create Profile"}
           </button>
         </div>
@@ -428,17 +372,13 @@ export default function RecruiterProfile() {
 
 function InfoCard({ icon: Icon, label, value }) {
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-gray-200 bg-white p-4 shadow-sm">
-      <div className="rounded-lg bg-gray-100 p-2 shrink-0">
-        <Icon size={16} className="text-gray-600" />
+    <div className="flex items-start gap-3 rounded-xl border border-border bg-surface p-4 shadow-sm">
+      <div className="rounded-lg bg-surface-hover p-2 shrink-0">
+        <Icon size={16} className="text-secondary" />
       </div>
       <div className="min-w-0">
-        <p className="text-xs font-semibold uppercase tracking-wider text-gray-400">
-          {label}
-        </p>
-        <p className="mt-0.5 text-sm font-medium text-brand-primary-hover break-words">
-          {value || "—"}
-        </p>
+        <p className="text-xs font-semibold uppercase tracking-wider text-muted">{label}</p>
+        <p className="mt-0.5 text-sm font-medium text-foreground break-words">{value || "—"}</p>
       </div>
     </div>
   );
@@ -447,9 +387,7 @@ function InfoCard({ icon: Icon, label, value }) {
 function FormField({ label, error, children }) {
   return (
     <div>
-      <label className="mb-1.5 block text-sm font-medium text-gray-700">
-        {label}
-      </label>
+      <label className="mb-1.5 block text-sm font-medium text-secondary">{label}</label>
       {children}
       {error && <p className="mt-1 text-sm text-red-500">{error.message}</p>}
     </div>

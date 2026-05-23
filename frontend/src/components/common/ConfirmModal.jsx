@@ -35,12 +35,12 @@ const ConfirmModal = ({
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm">
-      <div className="w-full max-w-md overflow-hidden rounded-2xl bg-white shadow-2xl animate-in fade-in zoom-in duration-200">
-        <div className="flex items-center justify-between border-b border-gray-100 p-4">
-          <h3 className="text-lg font-bold text-gray-900">{title}</h3>
+      <div className="w-full max-w-md overflow-hidden rounded-2xl bg-surface shadow-2xl animate-in fade-in zoom-in duration-200">
+        <div className="flex items-center justify-between border-b border-border p-4">
+          <h3 className="text-lg font-bold text-foreground">{title}</h3>
           <button
             onClick={onClose}
-            className="rounded-lg p-1 text-gray-400 hover:bg-gray-100 hover:text-gray-600"
+            className="rounded-lg p-1 text-muted hover:bg-surface-hover hover:text-secondary"
           >
             <X size={20} />
           </button>
@@ -52,17 +52,17 @@ const ConfirmModal = ({
               {style.icon}
             </div>
             <div>
-              <p className="text-sm text-gray-600 leading-relaxed">
+              <p className="text-sm text-secondary leading-relaxed">
                 {message}
               </p>
             </div>
           </div>
         </div>
 
-        <div className="flex justify-end gap-3 bg-gray-50 p-4">
+        <div className="flex justify-end gap-3 bg-surface-hover p-4">
           <button
             onClick={onClose}
-            className="rounded-xl border border-gray-200 px-4 py-2 text-sm font-bold text-gray-600 hover:bg-gray-100"
+            className="rounded-xl border border-border px-4 py-2 text-sm font-bold text-secondary hover:bg-surface"
           >
             {cancelText}
           </button>
