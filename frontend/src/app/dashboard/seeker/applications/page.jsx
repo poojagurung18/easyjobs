@@ -68,8 +68,8 @@ export default function SeekerApplications() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">My Applications</h1>
-        <p className="text-gray-600">
+        <h1 className="text-2xl font-bold text-foreground">My Applications</h1>
+        <p className="text-secondary">
           Track the status of your job applications
         </p>
       </div>
@@ -82,28 +82,28 @@ export default function SeekerApplications() {
             return (
               <div
                 key={app.id}
-                className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+                className="rounded-xl border border-border bg-surface p-6 shadow-sm"
               >
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                   <div className="flex-1">
                     <div className="flex items-center gap-3">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-gray-200 text-brand-primary">
-                        <Building2 size={20} />
-                      </div>
-                      <div>
-                        <h3 className="font-semibold text-gray-900">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-surface-hover text-brand-accent">
+                      <Building2 size={20} />
+                    </div>
+                    <div>
+                      <h3 className="font-semibold text-foreground">
                           {app.companyName ||
                             app.company?.companyName ||
                             app.job?.recruiter?.companyName ||
                             "Company"}
                         </h3>
-                        <p className="text-sm text-gray-500">
+                        <p className="text-sm text-secondary">
                           {app.jobTitle || app.job?.title}
                         </p>
                       </div>
                     </div>
 
-                    <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-500">
+                    <div className="mt-4 flex flex-wrap gap-4 text-sm text-secondary">
                       {app.job?.location && (
                         <span className="flex items-center gap-1">
                           <MapPin size={14} />
@@ -154,7 +154,7 @@ export default function SeekerApplications() {
                               : app.status?.toLowerCase() === "rejected" ||
                                 app.status?.toLowerCase() === "rejected"
                                 ? "bg-red-100 text-red-700"
-                                : "bg-gray-100 text-gray-700"
+                                : "bg-surface-hover text-foreground"
                       }`}
                     >
                       {app.status}
@@ -164,7 +164,7 @@ export default function SeekerApplications() {
                       {app.job && (
                         <Link
                           href={`/dashboard/seeker/jobs/${app.job.id || app.jobId}`}
-                          className="rounded-lg bg-gray-100 px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-200"
+                          className="rounded-lg bg-surface-hover px-3 py-1.5 text-xs font-medium text-foreground hover:bg-surface-hover"
                         >
                           View Job
                         </Link>
@@ -172,7 +172,7 @@ export default function SeekerApplications() {
                       <button
                         onClick={() => handleReport(recruiterId)}
                         disabled={reportMutation.isPending}
-                        className="rounded-lg p-1.5 text-gray-400 transition-colors hover:bg-red-50 hover:text-red-600"
+                        className="rounded-lg p-1.5 text-muted transition-colors hover:bg-red-50 hover:text-red-600"
                         title="Report Recruiter"
                       >
                         <Flag size={18} />
@@ -185,17 +185,17 @@ export default function SeekerApplications() {
           })}
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-200 bg-white p-12 text-center shadow-sm">
-          <Briefcase className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
+        <div className="rounded-xl border border-border bg-surface p-12 text-center shadow-sm">
+          <Briefcase className="mx-auto h-12 w-12 text-muted" />
+          <h3 className="mt-4 text-lg font-medium text-foreground">
             No applications yet
           </h3>
-          <p className="mt-1 text-gray-500">
+          <p className="mt-1 text-secondary">
             Start applying to jobs and track your applications here.
           </p>
           <Link
             href="/dashboard/seeker/jobs"
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white hover:bg-brand-primary-hover"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white hover:bg-brand-accent-hover"
           >
             Browse Jobs
           </Link>

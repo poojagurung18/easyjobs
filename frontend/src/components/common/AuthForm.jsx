@@ -158,7 +158,7 @@ export function AuthForm({ type, onSubmit }) {
       <button
         type="submit"
         disabled={isLoading}
-        className="w-full py-2.5 px-4 bg-brand-primary text-white rounded-lg font-bold hover:bg-brand-primary-hover focus:ring-2 focus:ring-brand-primary focus:ring-offset-2 shadow-lg shadow-brand-primary/20 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+        className="w-full py-2.5 px-4 bg-brand-accent text-white rounded-lg font-bold hover:bg-brand-accent-hover focus:ring-2 focus:ring-brand-accent focus:ring-offset-2 shadow-lg shadow-brand-accent/20 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
       >
         {isLoading && <Loader2 className="animate-spin" size={18} />}
         {type === "login" ? "Sign In" : "Create Account"}

@@ -2,6 +2,7 @@ import { Inter, Outfit } from "next/font/google";
 import "./globals.css";
 import QueryProvider from "@/components/provider/QueryProvider";
 import ToastProvider from "@/components/provider/ToastProvider";
+import ThemeProvider from "@/components/provider/ThemeProvider";
 import { AuthProvider } from "@/context/AuthContext";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
@@ -34,11 +35,13 @@ export default function RootLayout({ children }) {
     >
       <body className="min-h-full flex flex-col">
         <QueryProvider>
-          <ToastProvider />
-          <AuthProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-          </AuthProvider>
+          <ThemeProvider>
+            <ToastProvider />
+            <AuthProvider>
+              <Navbar />
+              <main className="flex-1">{children}</main>
+            </AuthProvider>
+          </ThemeProvider>
         </QueryProvider>
       </body>
     </html>

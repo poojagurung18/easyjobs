@@ -21,7 +21,7 @@ export default function LoginPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex text-gray-900 items-center justify-center">
+        <div className="min-h-screen flex text-foreground items-center justify-center bg-background">
           <Loader2 className="animate-spin w-8 h-8" />
         </div>
       }
@@ -73,12 +73,9 @@ function LoginForm() {
   };
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center py-12 px-4">
-      {/* Horizontal Background Split */}
-      <div className="absolute inset-0 flex flex-col pointer-events-none">
-        <div className="h-1/2 bg-white" />
-        <div className="h-1/2 bg-[#0f202d]" />
-      </div>
+    <div className="relative min-h-screen flex items-center justify-center py-12 px-4 bg-background">
+      {/* Background adapts to theme */}
+      <div className="absolute inset-0 pointer-events-none" />
 
       <div className="w-full max-w-md relative z-10">
         {/* Logo — above the card */}
@@ -98,17 +95,17 @@ function LoginForm() {
         </Link>
 
         {/* Card */}
-        <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl overflow-hidden">
+        <div className="bg-surface rounded-3xl border border-border shadow-2xl overflow-hidden">
           {/* Top accent bar using brand color */}
-          <div className="h-1.5 w-full bg-brand-primary" />
+          <div className="h-1.5 w-full bg-brand-accent" />
 
           <div className="px-8 py-10 sm:px-10">
             {/* Header */}
             <div className="mb-8">
-              <h1 className="text-3xl font-black text-brand-primary tracking-tight">
+              <h1 className="text-3xl font-black text-brand-accent tracking-tight">
                 Welcome back
               </h1>
-              <p className="text-gray-500 text-sm mt-2">
+              <p className="text-secondary text-sm mt-2">
                 Sign in to your EasyJobs account
               </p>
             </div>
@@ -116,22 +113,22 @@ function LoginForm() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               {/* Email */}
               <div className="space-y-2">
-                <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                <label className="text-xs font-bold text-muted uppercase tracking-widest">
                   Email Address
                 </label>
                 <div className="relative group">
                   <Mail
                     size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-brand-primary transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-brand-accent transition-colors"
                   />
                   <input
                     type="email"
                     placeholder="name@company.com"
                     {...register("email")}
-                    className={`w-full pl-11 pr-4 py-3.5 rounded-xl text-sm font-medium text-brand-primary
- placeholder:text-gray-300 border bg-white outline-none transition-all
- focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary/40
- ${errors.email ? "border-red-400 bg-red-50/30" : "border-gray-200"}`}
+                    className={`w-full pl-11 pr-4 py-3.5 rounded-xl text-sm font-medium text-foreground
+ placeholder:text-muted border bg-surface outline-none transition-all
+ focus:ring-4 focus:ring-brand-accent/5 focus:border-brand-accent/40
+ ${errors.email ? "border-red-400 bg-red-50/30 dark:bg-red-950/20" : "border-border"}`}
                   />
                 </div>
                 {errors.email && (
@@ -144,12 +141,12 @@ function LoginForm() {
               {/* Password */}
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-gray-400 uppercase tracking-widest">
+                  <label className="text-xs font-bold text-muted uppercase tracking-widest">
                     Password
                   </label>
                   <Link
                     href="/forgot-password"
-                    className="text-xs font-bold text-brand-primary hover:underline underline-offset-4 transition-all"
+                    className="text-xs font-bold text-brand-accent hover:underline underline-offset-4 transition-all"
                   >
                     Forgot Password?
                   </Link>
@@ -157,21 +154,21 @@ function LoginForm() {
                 <div className="relative group">
                   <Lock
                     size={18}
-                    className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-300 group-focus-within:text-brand-primary transition-colors"
+                    className="absolute left-4 top-1/2 -translate-y-1/2 text-muted group-focus-within:text-brand-accent transition-colors"
                   />
                   <input
                     type={showPassword ? "text" : "password"}
                     placeholder="••••••••"
                     {...register("password")}
-                    className={`w-full pl-11 pr-12 py-3.5 rounded-xl text-sm font-medium text-brand-primary
- placeholder:text-gray-300 border bg-white outline-none transition-all
- focus:ring-4 focus:ring-brand-primary/5 focus:border-brand-primary/40
- ${errors.password ? "border-red-400 bg-red-50/30" : "border-gray-200"}`}
+                    className={`w-full pl-11 pr-12 py-3.5 rounded-xl text-sm font-medium text-foreground
+ placeholder:text-muted border bg-surface outline-none transition-all
+ focus:ring-4 focus:ring-brand-accent/5 focus:border-brand-accent/40
+ ${errors.password ? "border-red-400 bg-red-50/30 dark:bg-red-950/20" : "border-border"}`}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-300 hover:text-brand-primary transition-colors"
+                    className="absolute right-4 top-1/2 -translate-y-1/2 text-muted hover:text-brand-accent transition-colors"
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
@@ -187,9 +184,9 @@ function LoginForm() {
               <button
                 type="submit"
                 disabled={isLoading}
-                className="w-full py-4 rounded-xl bg-brand-primary text-white text-base font-black
+                className="w-full py-4 rounded-xl bg-brand-accent text-white text-base font-black
  flex items-center justify-center gap-2
- hover:bg-brand-primary-hover shadow-xl shadow-brand-primary/20 active:scale-[0.98] transition-all duration-200
+ hover:bg-brand-accent-hover shadow-xl shadow-brand-accent/20 active:scale-[0.98] transition-all duration-200
  disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isLoading ? (
@@ -205,19 +202,19 @@ function LoginForm() {
 
             {/* Divider */}
             <div className="flex items-center gap-4 my-8">
-              <div className="flex-1 h-px bg-gray-100" />
-              <span className="text-xs text-gray-400 font-bold uppercase tracking-widest">
+              <div className="flex-1 h-px bg-border" />
+              <span className="text-xs text-muted font-bold uppercase tracking-widest">
                 or
               </span>
-              <div className="flex-1 h-px bg-gray-100" />
+              <div className="flex-1 h-px bg-border" />
             </div>
 
             {/* Footer */}
-            <p className="text-center text-sm text-gray-500">
+            <p className="text-center text-sm text-secondary">
               New to EasyJobs?{""}
               <Link
                 href="/register"
-                className="text-brand-primary font-black ml-2 hover:underline underline-offset-4"
+                className="text-brand-accent font-black ml-2 hover:underline underline-offset-4"
               >
                 Create an account
               </Link>

@@ -299,8 +299,8 @@ export default function RecruiterSubscription() {
                 className={`mt-6 w-full rounded-lg px-4 py-2.5 text-sm font-medium transition-colors ${isCurrentPlan
                     ? "cursor-default bg-gray-100 text-gray-500"
                     : plan.popular
-                      ? "bg-brand-primary text-white hover:bg-brand-primary-hover"
-                      : "bg-gray-900 text-white hover:bg-brand-primary-hover"
+                      ? "bg-brand-accent text-white hover:bg-brand-accent-hover"
+                      : "bg-gray-900 text-white hover:bg-brand-accent-hover"
                   }`}
               >
                 {isCurrentPlan ? "Current Plan" : `Upgrade to ${plan.name}`}

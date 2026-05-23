@@ -368,7 +368,7 @@ export default function SeekerDashboard() {
         </div>
         <Link
           href="/dashboard/seeker/jobs"
-          className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-primary px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-primary/90 hover:shadow-lg active:scale-95"
+          className="inline-flex items-center justify-center gap-2 rounded-xl bg-brand-accent px-8 py-3.5 text-sm font-bold text-white transition-all hover:bg-brand-accent-hover hover:shadow-lg active:scale-95"
         >
           <Search size={18} />
           Explore Jobs

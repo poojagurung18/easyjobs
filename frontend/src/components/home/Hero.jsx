@@ -1,10 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
 
 export default function Hero() {
   return (
-    <section className="relative overflow-hidden bg-brand-dark dark-gradient py-24 md:py-32">
-      {/* Background Decorative Elements */}
+    <section className="relative overflow-hidden bg-background py-24 md:py-32">
       <div className="absolute top-0 right-0 w-1/2 h-full bg-brand-primary/10 blur-[120px] rounded-full -translate-y-1/2 translate-x-1/2"></div>
       <div className="absolute bottom-0 left-0 w-1/3 h-1/2 bg-brand-secondary/5 blur-[100px] rounded-full translate-y-1/2 -translate-x-1/2"></div>
 
@@ -12,55 +10,51 @@ export default function Hero() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           {/* Left — Text */}
           <div className="text-left">
-            <div className="inline-flex items-center gap-2 bg-white/5 border border-white/10 text-brand-secondary text-xs font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-widest backdrop-blur-sm">
+            <div className="inline-flex items-center gap-2 bg-foreground/5 border border-border text-brand-secondary text-xs font-bold px-4 py-2 rounded-full mb-8 uppercase tracking-widest backdrop-blur-sm">
               <span className="w-2.5 h-2.5 bg-brand-secondary rounded-full animate-pulse"></span>
               Modern Recruitment Solutions
             </div>
 
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-white leading-[1.1] tracking-tight mb-8">
+            <h1 className="text-5xl md:text-6xl lg:text-7xl font-black text-primary leading-[1.1] tracking-tight mb-8">
               Invest In Your <br />
-              <span className="bg-clip-text teal-gradient">
-                Future Success
-              </span>
+              <span className="bg-clip-text teal-gradient">Future Success</span>
             </h1>
 
-            <p className="text-gray-400 text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
+            <p className="text-secondary text-lg md:text-xl leading-relaxed mb-10 max-w-xl">
               Connect with high-performing teams and professional opportunities
-              that align with your ambitions. Secure your career with
-              Confidence.
+              that align with your ambitions. Secure your career with Confidence.
             </p>
 
             <div className="flex items-center gap-5 flex-wrap">
               <Link
                 href="/jobs"
-                className="teal-gradient text-white text-base font-bold px-8 py-4 rounded-xl hover:shadow-[0_0_20px_rgba(2,178,200,0.4)] transition-all transform hover:-translate-y-1 active:scale-95"
+                className="bg-brand-accent text-white text-base font-black px-8 py-4 rounded-xl hover:shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all transform hover:-translate-y-1 active:scale-95 shadow-lg"
               >
                 Get Started Now
               </Link>
               <Link
                 href="#features"
-                className="bg-white/5 border border-white/20 text-white text-base font-bold px-8 py-4 rounded-xl hover:bg-white/10 transition-all backdrop-blur-sm"
+                className="border-2 border-brand-accent text-brand-accent bg-white/80 text-base font-bold px-8 py-4 rounded-xl hover:bg-white transition-all"
               >
                 Learn More
               </Link>
             </div>
 
-            {/* Quick stats with glass effect */}
-            <div className="mt-16 grid grid-cols-3 gap-8 py-8 px-6 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md max-w-lg">
+            <div className="mt-16 grid grid-cols-3 gap-8 py-8 px-6 bg-foreground/5 border border-border rounded-2xl backdrop-blur-md max-w-lg">
               <div>
-                <p className="text-3xl font-black text-white">2.5k+</p>
+                <p className="text-3xl font-black text-primary">2.5k+</p>
                 <p className="text-[10px] text-brand-secondary uppercase font-black tracking-widest mt-1">
                   Jobs Live
                 </p>
               </div>
-              <div className="border-x border-white/10 px-4">
-                <p className="text-3xl font-black text-white">800+</p>
+              <div className="border-x border-border px-4">
+                <p className="text-3xl font-black text-primary">800+</p>
                 <p className="text-[10px] text-brand-secondary uppercase font-black tracking-widest mt-1">
                   Partners
                 </p>
               </div>
               <div>
-                <p className="text-3xl font-black text-white">12k+</p>
+                <p className="text-3xl font-black text-primary">12k+</p>
                 <p className="text-[10px] text-brand-secondary uppercase font-black tracking-widest mt-1">
                   Success
                 </p>
@@ -68,18 +62,17 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — Refined Visual */}
+          {/* Right — Visual */}
           <div className="relative lg:block">
-            <div className="relative z-10 rounded-[2rem] overflow-hidden aspect-[4/4] shadow-2xl border-4 border-white/10">
+            <div className="relative z-10 rounded-[2rem] overflow-hidden aspect-[4/4] shadow-2xl border-4 border-border">
               <img
                 src="Gemini_Generated_Image_5l618q5l618q5l61.png"
                 alt="Professional team"
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-dark/80 via-transparent to-transparent"></div>
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent"></div>
 
-              {/* Float Card 2 */}
-              <div className="absolute bottom-12 -right-8 bg-brand-primary p-5 rounded-2xl shadow-2xl text-white transform hover:scale-105 transition-transform">
+              <div className="absolute bottom-12 -right-8 bg-brand-primary p-5 rounded-2xl shadow-2xl text-primary transform hover:scale-105 transition-transform">
                 <p className="text-[10px] font-bold opacity-80 mb-2 uppercase tracking-widest">
                   Verified Matches
                 </p>
@@ -101,7 +94,6 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* Decorative Dot Grid */}
             <div
               className="absolute -bottom-10 -left-10 w-40 h-40 opacity-20"
               style={{

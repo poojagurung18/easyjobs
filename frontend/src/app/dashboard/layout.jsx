@@ -139,8 +139,8 @@ function DashboardContent({ children }) {
 
   if (isLoading) {
     return (
-      <div className="flex h-screen items-center justify-center bg-white">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-primary border-t-transparent"></div>
+      <div className="flex h-screen items-center justify-center bg-background">
+        <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-accent border-t-transparent"></div>
       </div>
     );
   }
@@ -148,7 +148,7 @@ function DashboardContent({ children }) {
   if (!isAuthenticated) return null;
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-background">
       {/* Pass all 4 props to Sidebar */}
       <Sidebar
         isCollapsed={isCollapsed}
@@ -163,14 +163,14 @@ function DashboardContent({ children }) {
         }`}
       >
         {/* Mobile Navbar Header */}
-        <header className="flex h-16 items-center border-b border-gray-100 px-4 lg:hidden">
+        <header className="flex h-16 items-center border-b border-border px-4 lg:hidden">
           <button
             onClick={() => setIsMobileOpen(true)}
-            className="rounded-lg p-2 text-gray-600 hover:bg-gray-100"
+            className="rounded-lg p-2 text-secondary hover:bg-surface-hover"
           >
             <Menu size={24} />
           </button>
-          <span className="ml-4 font-bold text-brand-primary">Dashboard</span>
+          <span className="ml-4 font-bold text-brand-accent">Dashboard</span>
         </header>
 
         <main className="p-4 lg:p-8">
@@ -185,8 +185,8 @@ export default function DashboardLayout({ children }) {
   return (
     <Suspense
       fallback={
-        <div className="flex h-screen items-center justify-center bg-white">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-primary border-t-transparent"></div>
+        <div className="flex h-screen items-center justify-center bg-background">
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-brand-accent border-t-transparent"></div>
         </div>
       }
     >

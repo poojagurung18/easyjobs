@@ -103,8 +103,8 @@ export default function RecruiterApplications() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Applications</h1>
-        <p className="text-gray-600">Review and manage job applications</p>
+        <h1 className="text-2xl font-bold text-foreground">Applications</h1>
+        <p className="text-secondary">Review and manage job applications</p>
       </div>
 
       {applicationsList.length > 0 ? (
@@ -119,19 +119,19 @@ export default function RecruiterApplications() {
             return (
             <div
               key={app.id}
-              className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+              className="rounded-xl border border-border bg-surface p-6 shadow-sm"
             >
               <div className="flex items-start justify-between">
                 <div className="flex-1">
                   <div className="flex items-center gap-3">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gray-200 text-brand-primary font-bold">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-full bg-surface-hover text-brand-accent font-bold">
                       {applicantName.charAt(0)}
                     </div>
                     <div>
-                      <h3 className="font-semibold text-gray-900">
+                      <h3 className="font-semibold text-foreground">
                         {applicantName}
                       </h3>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-secondary">
                         {jobTitle}
                       </p>
                     </div>
@@ -143,14 +143,14 @@ export default function RecruiterApplications() {
                             ? "bg-green-100 text-green-700"
                             : app.status?.toLowerCase() === "rejected"
                               ? "bg-red-100 text-red-700"
-                              : "bg-gray-100 text-gray-700"
+                              : "bg-surface-hover text-foreground"
                       }`}
                     >
                       {app.status}
                     </span>
                   </div>
 
-                  <div className="mt-4 flex flex-wrap gap-4 text-sm text-gray-500">
+                  <div className="mt-4 flex flex-wrap gap-4 text-sm text-secondary">
                     <span className="flex items-center gap-1">
                       <Mail size={14} />
                       {applicantEmail}
@@ -182,11 +182,11 @@ export default function RecruiterApplications() {
                   </div>
 
                   {(app.coverLetter || app.message) && (
-                    <div className="mt-4 rounded-lg bg-gray-50 p-4">
-                      <p className="text-sm font-medium text-gray-700">
+                    <div className="mt-4 rounded-lg bg-surface-hover p-4">
+                      <p className="text-sm font-medium text-foreground">
                         Cover Letter
                       </p>
-                      <p className="mt-1 text-sm text-gray-600">
+                      <p className="mt-1 text-sm text-secondary">
                         {app.coverLetter || app.message}
                       </p>
                     </div>
@@ -198,7 +198,7 @@ export default function RecruiterApplications() {
                         href={app.resumeUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white transition-all hover:bg-brand-primary shadow-sm"
+                        className="flex items-center gap-2 rounded-xl bg-slate-900 px-4 py-2 text-xs font-bold text-white transition-all hover:bg-brand-accent shadow-sm"
                       >
                         <FileText size={16} />
                         View Resume
@@ -211,9 +211,9 @@ export default function RecruiterApplications() {
                         href={doc.url}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 rounded-xl bg-gray-100 px-4 py-2 text-xs font-bold text-slate-700 transition-all hover:bg-gray-200 border border-gray-200 shadow-sm"
+                        className="flex items-center gap-2 rounded-xl bg-surface-hover px-4 py-2 text-xs font-bold text-foreground transition-all hover:bg-surface-hover border border-border shadow-sm"
                       >
-                        <FileText size={16} className="text-brand-primary" />
+                        <FileText size={16} className="text-brand-accent" />
                         View {doc.name}
                       </a>
                     ))}
@@ -246,7 +246,7 @@ export default function RecruiterApplications() {
                     <button
                       onClick={() => handleMessageApplicant(app)}
                       disabled={isStartingChat}
-                      className="flex items-center gap-1 rounded-lg border border-gray-200 bg-white px-3 py-1.5 text-xs font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50"
+                      className="flex items-center gap-1 rounded-lg border border-border bg-surface px-3 py-1.5 text-xs font-medium text-secondary hover:bg-surface-hover disabled:opacity-50"
                     >
                       {isStartingChat ? (
                         <Loader2 className="h-4 w-4 animate-spin" />
@@ -263,12 +263,12 @@ export default function RecruiterApplications() {
           })}
         </div>
       ) : (
-        <div className="rounded-xl border border-gray-200 bg-white p-12 text-center shadow-sm">
-          <Briefcase className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
+        <div className="rounded-xl border border-border bg-surface p-12 text-center shadow-sm">
+          <Briefcase className="mx-auto h-12 w-12 text-muted" />
+          <h3 className="mt-4 text-lg font-medium text-foreground">
             No applications yet
           </h3>
-          <p className="mt-1 text-gray-500">
+          <p className="mt-1 text-secondary">
             Applications will appear here when candidates apply to your jobs.
           </p>
         </div>
@@ -277,11 +277,11 @@ export default function RecruiterApplications() {
       {/* Interview Date Modal */}
       {interviewModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
-          <div className="w-full max-w-md rounded-xl bg-white p-6 shadow-xl">
-            <h3 className="text-lg font-bold text-gray-900">
+          <div className="w-full max-w-md rounded-xl bg-surface p-6 shadow-xl">
+            <h3 className="text-lg font-bold text-foreground">
               Schedule Interview
             </h3>
-            <p className="mt-1 text-sm text-gray-500">
+            <p className="mt-1 text-sm text-secondary">
               Select date and time for the interview
             </p>
             <div className="mt-4">

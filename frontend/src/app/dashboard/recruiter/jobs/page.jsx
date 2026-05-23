@@ -101,12 +101,12 @@ export default function RecruiterJobs() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">My Jobs</h1>
-          <p className="text-gray-600">Manage your job postings</p>
+          <h1 className="text-2xl font-bold text-foreground">My Jobs</h1>
+          <p className="text-secondary">Manage your job postings</p>
         </div>
         <Link
           href="/dashboard/recruiter/jobs/new"
-          className="flex items-center gap-2 rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-primary-hover"
+          className="flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-accent-hover"
         >
           <Plus size={16} />
           Post New Job
@@ -118,7 +118,7 @@ export default function RecruiterJobs() {
           {jobs.map((job) => (
             <div
               key={job.id}
-              className="group flex flex-col rounded-2xl border border-gray-100 bg-white p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 overflow-hidden relative"
+              className="group flex flex-col rounded-2xl border border-border bg-surface p-6 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 overflow-hidden relative"
             >
               {/* Card Header: Icon & Status */}
               <div className="flex items-start justify-between mb-4">
@@ -137,24 +137,24 @@ export default function RecruiterJobs() {
 
               {/* Title & Description */}
               <div className="flex-1">
-                <h3 className="text-xl font-bold text-slate-900 group-hover:text-brand-primary transition-colors line-clamp-1 mb-2">
+                <h3 className="text-xl font-bold text-foreground group-hover:text-brand-accent transition-colors line-clamp-1 mb-2">
                   {job.title}
                 </h3>
                 
-                <div className="text-sm leading-relaxed text-slate-500 line-clamp-3 mb-4 min-h-[4.5rem]">
+                <div className="text-sm leading-relaxed text-secondary line-clamp-3 mb-4 min-h-[4.5rem]">
                   <ContentRenderer content={job.description} />
                 </div>
 
                 {/* Metadata Badges */}
                 <div className="flex flex-wrap gap-2 mb-6">
-                  <span className="flex items-center gap-1.5 rounded-lg bg-gray-50 px-2.5 py-1.5 text-xs font-medium text-slate-600 border border-gray-100">
-                    <MapPin size={14} className="text-brand-primary" />
+                  <span className="flex items-center gap-1.5 rounded-lg bg-surface-hover px-2.5 py-1.5 text-xs font-medium text-slate-600 border border-border">
+                    <MapPin size={14} className="text-brand-accent" />
                     {job.location}
                   </span>
                 </div>
 
                 {/* Details Grid */}
-                <div className="grid grid-cols-2 gap-4 py-4 border-t border-gray-50">
+                <div className="grid grid-cols-2 gap-4 py-4 border-t border-border">
                   <div className="space-y-1">
                     <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold">Hirings</p>
                     <div className="flex items-center gap-1.5 text-sm font-bold text-slate-700">
@@ -173,7 +173,7 @@ export default function RecruiterJobs() {
 
                 {/* Required Documents Section (if any) */}
                 {job.requiredDocuments && job.requiredDocuments.length > 0 && (
-                  <div className="mt-4 pt-4 border-t border-gray-50">
+                  <div className="mt-4 pt-4 border-t border-border">
                     <p className="text-[10px] uppercase tracking-wider text-slate-400 font-bold mb-2">Required Documents</p>
                     <div className="flex flex-wrap gap-1.5">
                       {job.requiredDocuments.map((doc, idx) => (
@@ -209,9 +209,9 @@ export default function RecruiterJobs() {
         </div>
 
       ) : (
-        <div className="rounded-xl border border-gray-200 bg-white p-12 text-center shadow-sm">
-          <Briefcase className="mx-auto h-12 w-12 text-gray-400" />
-          <h3 className="mt-4 text-lg font-medium text-gray-900">
+        <div className="rounded-xl border border-border bg-surface p-12 text-center shadow-sm">
+          <Briefcase className="mx-auto h-12 w-12 text-muted" />
+          <h3 className="mt-4 text-lg font-medium text-foreground">
             No jobs posted yet
           </h3>
           <p className="mt-1 text-gray-500">
@@ -219,7 +219,7 @@ export default function RecruiterJobs() {
           </p>
           <Link
             href="/dashboard/recruiter/jobs/new"
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white hover:bg-brand-primary-hover"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white hover:bg-brand-accent-hover"
           >
             <Plus size={16} />
             Post Your First Job

@@ -89,7 +89,7 @@ export default function SavedJobs() {
           </p>
           <Link
             href="/dashboard/seeker/jobs"
-            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white hover:bg-brand-primary-hover"
+            className="mt-4 inline-flex items-center gap-2 rounded-lg bg-brand-accent px-4 py-2 text-sm font-medium text-white hover:bg-brand-accent-hover"
           >
             Browse Jobs
           </Link>

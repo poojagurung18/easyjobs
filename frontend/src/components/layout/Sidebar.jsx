@@ -295,7 +295,7 @@ export default function Sidebar({
 
       <aside
         ref={sidebarRef}
-        className={`fixed left-0 top-0 z-50 h-screen border-r border-gray-200 bg-white transition-all duration-300 ease-in-out
+        className={`fixed left-0 top-0 z-50 h-screen border-r border-border bg-surface transition-all duration-300 ease-in-out
           ${isMobileOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"}
           ${isCollapsed ? "lg:w-20" : "lg:w-64"}
         `}
@@ -304,7 +304,7 @@ export default function Sidebar({
           {/* Logo / Header Area */}
           <div className="flex h-16 items-center justify-between px-6">
             <span
-              className={`text-xl font-bold text-brand-primary transition-opacity ${isCollapsed && !isMobileOpen ? "lg:opacity-0" : "opacity-100"}`}
+              className={`text-xl font-bold text-brand-accent transition-opacity ${isCollapsed && !isMobileOpen ? "lg:opacity-0" : "opacity-100"}`}
             >
               JOBPORTAL
             </span>
@@ -312,7 +312,7 @@ export default function Sidebar({
               onClick={() => setIsMobileOpen(false)}
               className="lg:hidden"
             >
-              <X size={20} className="text-gray-500" />
+              <X size={20} className="text-muted" />
             </button>
           </div>
 
@@ -328,13 +328,13 @@ export default function Sidebar({
                   href={item.href}
                   className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-all ${
                     isActive
-                      ? "bg-gray-100 text-brand-primary"
-                      : "text-gray-600 hover:bg-gray-50"
+                      ? "bg-surface-hover text-brand-accent"
+                      : "text-secondary hover:bg-surface-hover"
                   }`}
                 >
                   <Icon
                     size={20}
-                    className={`flex-shrink-0 ${isActive ? "text-brand-primary" : "text-gray-400"}`}
+                    className={`flex-shrink-0 ${isActive ? "text-brand-accent" : "text-muted"}`}
                   />
                   <span
                     className={`transition-opacity duration-200 ${isCollapsed && !isMobileOpen ? "lg:hidden" : "block"}`}
@@ -347,20 +347,20 @@ export default function Sidebar({
           </nav>
 
           {/* User Profile & Logout */}
-          <div className="border-t border-gray-100 p-4">
+          <div className="border-t border-border p-4">
             <div
               className={`mb-4 flex items-center gap-3 px-2 ${isCollapsed && !isMobileOpen ? "lg:justify-center lg:px-0" : ""}`}
             >
-              <div className="h-9 w-9 rounded-full bg-brand-primary/10 flex items-center justify-center text-brand-primary font-bold">
+              <div className="h-9 w-9 rounded-full bg-brand-accent/10 flex items-center justify-center text-brand-accent font-bold">
                 {user?.email?.[0].toUpperCase()}
               </div>
               <div
                 className={`min-w-0 ${isCollapsed && !isMobileOpen ? "lg:hidden" : "block"}`}
               >
-                <p className="truncate text-sm font-semibold text-gray-900">
+                <p className="truncate text-sm font-semibold text-foreground">
                   {user?.email?.split("@")[0]}
                 </p>
-                <p className="text-xs text-gray-500 capitalize">
+                <p className="text-xs text-muted capitalize">
                   {user?.role?.replace("_", " ")}
                 </p>
               </div>
@@ -384,7 +384,7 @@ export default function Sidebar({
           {/* Desktop Toggle Button */}
           <button
             onClick={() => setIsCollapsed(!isCollapsed)}
-            className="hidden lg:flex absolute -right-3 top-10 h-6 w-6 items-center justify-center rounded-full border border-gray-200 bg-white shadow-sm hover:bg-gray-50"
+            className="hidden lg:flex absolute -right-3 top-10 h-6 w-6 items-center justify-center rounded-full border border-border bg-surface shadow-sm hover:bg-surface-hover"
           >
             {isCollapsed ? (
               <ChevronRight size={14} />

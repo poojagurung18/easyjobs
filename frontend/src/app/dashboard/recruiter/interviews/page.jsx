@@ -261,7 +261,7 @@ export default function RecruiterInterviews() {
             </p>
             <Link
               href="/dashboard/recruiter/applications"
-              className="mt-4 inline-flex items-center gap-2 bg-brand-primary text-white font-semibold px-5 py-2 rounded-xl hover:bg-brand-primary-hover transition-colors text-sm shadow-lg shadow-brand-primary/20"
+              className="mt-4 inline-flex items-center gap-2 bg-brand-accent text-white font-semibold px-5 py-2 rounded-xl hover:bg-brand-accent-hover transition-colors text-sm shadow-lg shadow-brand-accent/20"
             >
               Shortlist Candidates
               <ArrowRight size={16} />

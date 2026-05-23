@@ -253,7 +253,7 @@ export default function NewJobPage() {
           <button
             type="submit"
             disabled={mutation.isPending || isCreditsLoading}
-            className="flex items-center gap-2 rounded-lg bg-brand-primary px-6 py-2.5 text-sm font-medium text-white hover:bg-brand-primary-hover disabled:opacity-50"
+            className="flex items-center gap-2 rounded-lg bg-brand-accent px-6 py-2.5 text-sm font-medium text-white hover:bg-brand-accent-hover disabled:opacity-50"
           >
             {mutation.isPending ? (
               <Loader2 className="h-4 w-4 animate-spin" />

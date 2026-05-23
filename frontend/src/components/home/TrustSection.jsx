@@ -23,17 +23,19 @@ const trustItems = [
 
 export default function TrustSection() {
   return (
-    <section className="bg-brand-dark py-24 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full dark-gradient opacity-50"></div>
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="bg-background py-24 relative overflow-hidden">
+      <div className="absolute top-0 left-0 w-full h-full opacity-50"
+        style={{ background: "linear-gradient(135deg, var(--background) 0%, var(--surface) 100%)" }}
+      ></div>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
         <div className="text-center mb-12">
           <span className="inline-block text-xs font-black text-brand-secondary bg-brand-secondary/10 border border-brand-secondary/30 px-4 py-2 rounded-full uppercase tracking-widest mb-4">
-            Trust & Safety
+            Trust &amp; Safety
           </span>
-          <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-4 relative z-10">
+          <h2 className="text-4xl md:text-5xl font-black text-primary tracking-tight mb-4">
             A Platform You Can Trust
           </h2>
-          <p className="text-gray-400 max-w-md mx-auto text-sm leading-relaxed">
+          <p className="text-secondary max-w-md mx-auto text-sm leading-relaxed">
             We take safety and transparency seriously at every step of the
             hiring journey.
           </p>
@@ -43,15 +45,11 @@ export default function TrustSection() {
           {trustItems.map((item, i) => (
             <div
               key={i}
-              className="bg-white/5 border border-white/10 rounded-2xl p-6 hover:bg-white/8 hover:border-white/20 transition-all"
+              className="bg-foreground/5 border border-border rounded-2xl p-6 hover:bg-foreground/10 hover:border-brand-primary/20 transition-all"
             >
               <div className="text-3xl mb-4">{item.icon}</div>
-              <h3 className="font-bold text-white text-sm mb-2">
-                {item.title}
-              </h3>
-              <p className="text-gray-400 text-sm leading-relaxed">
-                {item.desc}
-              </p>
+              <h3 className="font-bold text-primary text-sm mb-2">{item.title}</h3>
+              <p className="text-secondary text-sm leading-relaxed">{item.desc}</p>
             </div>
           ))}
         </div>

@@ -201,9 +201,9 @@ function VerifyOtpContent() {
                 <button
                   type="submit"
                   disabled={isLoading || otp.includes("")}
-                  className="w-full py-4 rounded-xl bg-brand-primary text-white text-base font-black
+                  className="w-full py-4 rounded-xl bg-brand-accent text-white text-base font-black
                     flex items-center justify-center gap-2
-                    hover:bg-brand-primary-hover shadow-xl shadow-brand-primary/20 active:scale-[0.98] transition-all duration-200
+                    hover:bg-brand-accent-hover shadow-xl shadow-brand-accent/20 active:scale-[0.98] transition-all duration-200
                     disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isLoading ? (

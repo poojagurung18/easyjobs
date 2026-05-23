@@ -206,7 +206,7 @@ export default function SeekerJobDetailPage() {
                   ) : (
                     <button
                       onClick={() => router.push(`/dashboard/seeker/apply/${jobId}`)}
-                      className="w-full cursor-pointer rounded-xl bg-slate-900 py-4 text-center text-sm font-bold text-white transition-all hover:bg-brand-primary shadow-lg shadow-slate-900/10 hover:shadow-brand-primary/20 active:scale-95"
+                      className="w-full cursor-pointer rounded-xl bg-brand-accent py-4 text-center text-sm font-bold text-white transition-all hover:bg-brand-accent-hover shadow-lg shadow-brand-accent/10 hover:shadow-brand-accent/20 active:scale-95"
                     >
                       Apply Now
                     </button>
