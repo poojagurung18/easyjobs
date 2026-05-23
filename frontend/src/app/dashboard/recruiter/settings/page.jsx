@@ -1,5 +1,6 @@
 "use client";
 
+import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
 import {
   User,
@@ -9,9 +10,11 @@ import {
   Trash2,
   AlertTriangle,
 } from "lucide-react";
+import ChangePasswordModal from "@/components/common/ChangePasswordModal";
 
 export default function RecruiterSettings() {
   const { user } = useAuth();
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   return (
     <div className="space-y-6">
@@ -73,7 +76,10 @@ export default function RecruiterSettings() {
           </div>
         </div>
 
-        <button className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">
+        <button
+          onClick={() => setIsPasswordModalOpen(true)}
+          className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors"
+        >
           Change Password
         </button>
       </div>
@@ -94,6 +100,11 @@ export default function RecruiterSettings() {
           Delete Account
         </button>
       </div>
+
+      <ChangePasswordModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+      />
     </div>
   );
 }

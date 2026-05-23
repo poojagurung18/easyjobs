@@ -1,30 +1,27 @@
-@import "tailwindcss";
+/* @import "tailwindcss";
 
 :root {
-  /* Rich, premium, deep absolute dark background */
   --background: #060b13;
-  
-  /* Crisp, clean, luxury light gray text */
+
   --foreground: #f1f5f9;
-  
-  /* Brand Colors - Glowing Cyan & Emerald for ultra-premium look */
-  --primary: #0ea5e9; /* Sky 500 */
-  --primary-hover: #0284c7; /* Sky 600 */
-  --secondary: #10b981; /* Emerald 500 */
-  --accent: #06b6d4; /* Cyan 500 */
-  --dark: #ffffff; /* Contrast text/elements */
-  --light-bg: #111a2e; /* Dark slate elevated bg */
-  
-  /* Custom fonts */
-  --font-inter: 'Inter', system-ui, sans-serif;
+
+  --primary: #0ea5e9; 
+  --primary-hover: #0284c7; 
+  --secondary: #10b981; 
+  --accent: #06b6d4; 
+  --dark: #ffffff; 
+  --light-bg: #111a2e; 
+
+  --font-inter: "Inter", system-ui, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-inter: var(--font-inter);
-  
-  /* Brand Theme Extensions */
+  --font-outfit: var(--font-outfit);
+
+
   --color-brand-primary: var(--primary);
   --color-brand-primary-hover: var(--primary-hover);
   --color-brand-secondary: var(--secondary);
@@ -32,7 +29,7 @@
   --color-brand-dark: var(--dark);
   --color-brand-light: var(--light-bg);
 
-  /* Global override of default colors for automatic theme-wide dark-mode transformation! */
+
   --color-white: #ffffff;
   --color-gray-50: #10192a;
   --color-gray-100: #1b263b;
@@ -44,13 +41,10 @@
   --color-gray-700: #e2e8f0;
   --color-gray-800: #f1f5f9;
   --color-gray-900: #ffffff;
-  
-  /* Premium dark overrides for purple cards */
+
   --color-purple-50: #12102e;
   --color-purple-100: #2a205a;
   --color-purple-700: #c084fc;
-  
-  /* Premium dark overrides for semantic status indicators */
   --color-green-100: rgba(16, 185, 129, 0.1);
   --color-green-700: #34d399;
   --color-red-100: rgba(239, 68, 68, 0.1);
@@ -62,7 +56,6 @@
   --color-blue-600: #60a5fa;
   --color-blue-700: #93c5fd;
 
-  /* Form & input borders */
   --color-slate-900: #0ea5e9;
   --color-slate-200: #29354d;
 }
@@ -70,11 +63,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-outfit), sans-serif;
   -webkit-font-smoothing: antialiased;
 }
 
-/* Custom Utilities with classy glassmorphism and modern gradient details */
+
 .glass-effect {
   background: rgba(11, 18, 31, 0.75);
   backdrop-filter: blur(16px);
@@ -90,7 +83,6 @@ body {
   background: linear-gradient(135deg, #060b13 0%, #111a2e 100%);
 }
 
-/* Custom scrollbars for a premium classy feel */
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -108,8 +100,86 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #29354d;
 }
-
-/* Global utility override so standard Tailwind card wrappers styled with bg-white are deep dark slate! */
 .bg-white {
   background-color: #0b121f !important;
+}
+
+@layer components {
+  .modern-input {
+    @apply w-full rounded-2xl border border-gray-200 bg-gray-50/30 px-4 py-3.5 text-sm font-medium outline-none transition-all placeholder:text-gray-400 focus:border-brand-primary focus:bg-white focus:ring-4 focus:ring-brand-primary/10;
+  }
+} */
+@import "tailwindcss";
+
+:root {
+  /* Clean, modern light background */
+  --background: #f8fafc;
+  --foreground: #0f172a;
+
+  /* Professional Blue/Indigo Brand */
+  --primary: #3b82f6;
+  --primary-hover: #2563eb;
+  --secondary: #6366f1;
+  --accent: #0ea5e9;
+  --dark: #1e293b;
+  --light-bg: #ffffff;
+
+  --font-inter: "Inter", system-ui, sans-serif;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-inter: var(--font-inter);
+
+  --color-brand-primary: var(--primary);
+  --color-brand-primary-hover: var(--primary-hover);
+  --color-brand-secondary: var(--secondary);
+  --color-brand-accent: var(--accent);
+  --color-brand-dark: var(--dark);
+  --color-brand-light: var(--light-bg);
+
+  /* Restore standard Tailwind light colors */
+  --color-gray-50: #f9fafb;
+  --color-gray-100: #f3f4f6;
+  --color-gray-200: #e5e7eb;
+  --color-gray-300: #d1d5db;
+  --color-gray-400: #9ca3af;
+  --color-gray-500: #6b7280;
+  --color-gray-600: #4b5563;
+  --color-gray-700: #374151;
+  --color-gray-800: #1f2937;
+  --color-gray-900: #111827;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Utilities */
+.glass-effect {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0;
+  border-radius: 10px;
+}
+
+@layer components {
+  .modern-input {
+    @apply w-full rounded-xl border border-gray-200 bg-white px-4 py-3 text-sm font-medium outline-none transition-all placeholder:text-gray-400 focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/5;
+  }
 }

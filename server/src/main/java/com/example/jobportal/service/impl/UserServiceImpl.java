@@ -200,4 +200,52 @@ public class UserServiceImpl implements UserService {
             throw JobException.internalServerError("Failed to register user: " + ex.getMessage());
         }
     }
+
+    @Override
+    public Response changePassword(Long userId, ChangePasswordRequest request) {
+        try {
+            // Validate request
+            if (request.getCurrentPassword() == null || request.getCurrentPassword().isEmpty()) {
+                throw JobException.badRequest("Current password is required");
+            }
+
+            if (request.getNewPassword() == null || request.getNewPassword().isEmpty()) {
+                throw JobException.badRequest("New password is required");
+            }
+
+            if (request.getConfirmNewPassword() == null || request.getConfirmNewPassword().isEmpty()) {
+                throw JobException.badRequest("Confirm password is required");
+            }
+
+            // Check if new password and confirm password match
+            if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
+                throw JobException.badRequest("New password and confirm password do not match");
+            }
+
+            // Check if new password is different from current password
+            if (request.getCurrentPassword().equals(request.getNewPassword())) {
+                throw JobException.badRequest("New password must be different from current password");
+            }
+
+            // Get the user
+            User user = userRepository.findById(userId)
+                    .orElseThrow(() -> JobException.notFound("User not found"));
+
+            // Verify current password
+            if (!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())) {
+                throw JobException.unauthorized("Current password is incorrect");
+            }
+
+            // Encode and update password
+            String encodedPassword = passwordEncoder.encode(request.getNewPassword());
+            userRepository.updatePasswordByEmail(user.getEmail(), encodedPassword);
+
+            return new Response("Password changed successfully");
+        } catch (Exception e) {
+            if (e instanceof JobException) {
+                throw e;
+            }
+            throw JobException.internalServerError("Failed to change password: " + e.getMessage());
+        }
+    }
 }

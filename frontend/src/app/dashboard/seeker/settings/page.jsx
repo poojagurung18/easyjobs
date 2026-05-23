@@ -2,161 +2,160 @@
 
 import { useState } from "react";
 import { useAuth } from "@/context/AuthContext";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { z } from "zod";
-import { Loader2, User, Lock, Bell, Moon, Sun } from "lucide-react";
+import { 
+  User, 
+  Lock, 
+  Bell, 
+  Moon, 
+  Sun, 
+  ShieldCheck, 
+  Mail, 
+  ChevronRight,
+  Globe
+} from "lucide-react";
 import toast from "react-hot-toast";
-
-const passwordSchema = z
-  .object({
-    currentPassword: z.string().min(6, "Current password is required"),
-    newPassword: z
-      .string()
-      .min(6, "New password must be at least 6 characters"),
-    confirmPassword: z.string(),
-  })
-  .refine((data) => data.newPassword === data.confirmPassword, {
-    message: "Passwords don't match",
-    path: ["confirmPassword"],
-  });
+import ChangePasswordModal from "@/components/common/ChangePasswordModal";
 
 export default function SeekerSettings() {
   const { user } = useAuth();
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [emailNotifications, setEmailNotifications] = useState(true);
-
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm({
-    resolver: zodResolver(passwordSchema),
-  });
-
-  const onPasswordSubmit = (data) => {
-    toast.success("Password updated successfully!");
-    reset();
-  };
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   const handleThemeToggle = () => {
     setIsDarkMode(!isDarkMode);
-    document.documentElement.classList.toggle("dark");
-    toast.success(`Switched to ${isDarkMode ? "light" : "dark"} mode`);
+    // document.documentElement.classList.toggle("dark"); // Uncomment when dark mode is ready
+    toast.success(`Switched to ${!isDarkMode ? "dark" : "light"} mode`);
   };
 
   return (
-    <div className="space-y-6">
+    <div className="w-full space-y-8 pb-10">
+      {/* Header */}
       <div>
-        <h1 className="text-2xl font-bold text-gray-900">Settings</h1>
-        <p className="text-gray-600">Manage your account preferences</p>
+        <h1 className="text-3xl font-bold tracking-tight text-gray-900">Settings</h1>
+        <p className="text-gray-500 mt-1">Manage your account security and preferences.</p>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gray-200 text-brand-primary">
-            <User size={20} />
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
+        {/* Left Column: Navigation Hints / Profile Summary */}
+        <div className="lg:col-span-1 space-y-6">
+          <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <div className="flex flex-col items-center text-center">
+              <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-brand-primary/10 text-brand-primary">
+                <User size={32} />
+              </div>
+              <h2 className="mt-4 font-bold text-gray-900">{user?.email?.split('@')[0]}</h2>
+              <p className="text-sm text-gray-500 capitalize">{user?.role?.replace('_', ' ')} Account</p>
+            </div>
+            
+            <div className="mt-8 space-y-2">
+               <div className="flex items-center gap-3 rounded-xl bg-gray-50 p-3 text-sm font-medium text-gray-700">
+                  <Mail size={16} className="text-brand-primary" />
+                  <span className="truncate">{user?.email}</span>
+               </div>
+            </div>
           </div>
-          <div>
-            <p className="font-semibold text-gray-900">Account Information</p>
-            <p className="text-sm text-gray-500">Your basic account details</p>
+
+          <div className="rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
+            <h3 className="text-xs font-bold uppercase tracking-widest text-gray-400 mb-4">Security Status</h3>
+            <div className="flex items-center gap-3 text-sm font-bold text-emerald-600 bg-emerald-50 p-3 rounded-xl border border-emerald-100">
+               <ShieldCheck size={18} />
+               Account is Active
+            </div>
           </div>
         </div>
 
-        <div className="space-y-4">
-          <div className="flex items-center justify-between py-3 border-b border-gray-100">
-            <div>
-              <p className="font-medium text-gray-900">Email</p>
-              <p className="text-sm text-gray-500">
-                {user?.email || "Not available"}
-              </p>
+        {/* Right Column: Interactive Settings */}
+        <div className="lg:col-span-2 space-y-6">
+          
+          {/* Security Section */}
+          <section className="rounded-3xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+            <div className="p-6 border-b border-gray-50">
+              <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                <Lock size={18} className="text-brand-primary" />
+                Security & Privacy
+              </h3>
             </div>
-          </div>
-          <div className="flex items-center justify-between py-3 border-b border-gray-100">
-            <div>
-              <p className="font-medium text-gray-900">Account Type</p>
-              <p className="text-sm text-gray-500 capitalize">
-                {user?.role || "Employee"}
-              </p>
+            <div className="p-6 space-y-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="font-bold text-gray-900">Account Password</p>
+                  <p className="text-sm text-gray-500 text-balance">Update your password regularly to keep your account secure.</p>
+                </div>
+                <button
+                  onClick={() => setIsPasswordModalOpen(true)}
+                  className="shrink-0 rounded-xl bg-gray-900 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-gray-800 active:scale-95 shadow-lg shadow-gray-200"
+                >
+                  Change Password
+                </button>
+              </div>
             </div>
+          </section>
+
+          {/* Preferences Section */}
+          <section className="rounded-3xl border border-gray-100 bg-white shadow-sm overflow-hidden">
+            <div className="p-6 border-b border-gray-50">
+              <h3 className="font-bold text-gray-900 flex items-center gap-2">
+                <Bell size={18} className="text-brand-primary" />
+                System Preferences
+              </h3>
+            </div>
+            <div className="p-6 divide-y divide-gray-50">
+              {/* Dark Mode Toggle */}
+              <div className="flex items-center justify-between py-4 first:pt-0">
+                <div className="flex items-center gap-4">
+                  <div className={`p-2 rounded-xl ${isDarkMode ? 'bg-indigo-50 text-indigo-600' : 'bg-orange-50 text-orange-600'}`}>
+                    {isDarkMode ? <Moon size={20} /> : <Sun size={20} />}
+                  </div>
+                  <div>
+                    <p className="font-bold text-gray-900">Appearance</p>
+                    <p className="text-sm text-gray-500">Switch between light and dark theme</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={handleThemeToggle}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${isDarkMode ? 'bg-brand-primary' : 'bg-gray-200'}`}
+                >
+                  <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${isDarkMode ? 'translate-x-6' : 'translate-x-1'}`} />
+                </button>
+              </div>
+
+              {/* Email Notifications Toggle */}
+              <div className="flex items-center justify-between py-4">
+                <div className="flex items-center gap-4">
+                  <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
+                    <Globe size={20} />
+                  </div>
+                  <div>
+                    <p className="font-bold text-gray-900">Email Notifications</p>
+                    <p className="text-sm text-gray-500">Receive job alerts and application updates</p>
+                  </div>
+                </div>
+                <button 
+                  onClick={() => setEmailNotifications(!emailNotifications)}
+                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${emailNotifications ? 'bg-brand-primary' : 'bg-gray-200'}`}
+                >
+                  <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${emailNotifications ? 'translate-x-6' : 'translate-x-1'}`} />
+                </button>
+              </div>
+            </div>
+          </section>
+
+          {/* Danger Zone */}
+          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-between">
+            <p className="text-sm font-bold text-rose-700 px-2">Need to deactivate your account?</p>
+            <button className="text-sm font-bold text-rose-600 hover:underline px-2 transition-all active:opacity-70">
+              Learn how
+            </button>
           </div>
         </div>
       </div>
 
-      <div className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-100 text-purple-600">
-            <Lock size={20} />
-          </div>
-          <div>
-            <p className="font-semibold text-gray-900">Change Password</p>
-            <p className="text-sm text-gray-500">Update your password</p>
-          </div>
-        </div>
-
-        <form onSubmit={handleSubmit(onPasswordSubmit)} className="space-y-4">
-          <div>
-            <label className="mb-1.5 block text-sm font-medium text-gray-700">
-              Current Password
-            </label>
-            <input
-              type="password"
-              {...register("currentPassword")}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
-              placeholder="••••••••"
-            />
-            {errors.currentPassword && (
-              <p className="mt-1 text-sm text-red-500">
-                {errors.currentPassword.message}
-              </p>
-            )}
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                New Password
-              </label>
-              <input
-                type="password"
-                {...register("newPassword")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
-                placeholder="••••••••"
-              />
-              {errors.newPassword && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.newPassword.message}
-                </p>
-              )}
-            </div>
-
-            <div>
-              <label className="mb-1.5 block text-sm font-medium text-gray-700">
-                Confirm New Password
-              </label>
-              <input
-                type="password"
-                {...register("confirmPassword")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
-                placeholder="••••••••"
-              />
-              {errors.confirmPassword && (
-                <p className="mt-1 text-sm text-red-500">
-                  {errors.confirmPassword.message}
-                </p>
-              )}
-            </div>
-          </div>
-
-          <button
-            type="submit"
-            className="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white hover:bg-brand-primary-hover"
-          >
-            Update Password
-          </button>
-        </form>
-      </div>
+      {/* Modal Component */}
+      <ChangePasswordModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
+      />
     </div>
   );
 }

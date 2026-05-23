@@ -11,5 +11,6 @@ public interface UserService {
     LoginResponse loginUser(LoginRequest request);
     List<User> getAllUsers();
     LoginResponse verifyOtp(OtpRequest request);
+    Response changePassword(Long userId, ChangePasswordRequest request);
 }
 

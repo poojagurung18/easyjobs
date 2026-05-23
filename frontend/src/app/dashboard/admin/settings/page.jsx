@@ -9,11 +9,13 @@ import { Loader2, Trash2, Shield, AlertTriangle } from "lucide-react";
 import toast from "react-hot-toast";
 
 import ConfirmModal from "@/components/common/ConfirmModal";
+import ChangePasswordModal from "@/components/common/ChangePasswordModal";
 
 export default function AdminSettings() {
   const { user, logout } = useAuth();
   const router = useRouter();
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
 
   const deleteAccountMutation = useMutation({
     mutationFn: () => adminService.deleteOwnAccount(),
@@ -98,7 +100,10 @@ export default function AdminSettings() {
               <p className="font-medium text-gray-900">Password</p>
               <p className="text-sm text-gray-500">Last changed: Never</p>
             </div>
-            <button className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200">
+            <button
+              onClick={() => setIsPasswordModalOpen(true)}
+              className="rounded-lg bg-gray-100 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-200 transition-colors"
+            >
               Change Password
             </button>
           </div>
@@ -134,6 +139,11 @@ export default function AdminSettings() {
         title="Delete Account"
         message="Are you sure you want to delete your admin account? This action cannot be undone and all your data will be permanently lost."
         type="danger"
+      />
+
+      <ChangePasswordModal
+        isOpen={isPasswordModalOpen}
+        onClose={() => setIsPasswordModalOpen(false)}
       />
     </div>
   );
