@@ -190,9 +190,13 @@ import {
   MessageSquare,
   Calendar,
   X,
+  Sun,
+  Moon,
 } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
+import { useThemeStore } from "@/store/themeStore";
 
 const seekerMenuItems = [
   { href: "/dashboard/seeker", label: "Overview", icon: LayoutDashboard },
@@ -227,11 +231,6 @@ const recruiterMenuItems = [
     icon: Calendar,
   },
   { href: "/dashboard/recruiter/chat", label: "Messages", icon: MessageSquare },
-  {
-    href: "/dashboard/recruiter/subscription",
-    label: "Subscription",
-    icon: CreditCard,
-  },
   { href: "/dashboard/recruiter/settings", label: "Settings", icon: Settings },
 ];
 
@@ -255,6 +254,7 @@ export default function Sidebar({
   const pathname = usePathname();
   const { user, logout } = useAuth();
   const sidebarRef = useRef(null);
+  const { isDark, toggleTheme } = useThemeStore();
 
   const role = user?.role?.toLowerCase();
   const menuItems =
@@ -295,22 +295,28 @@ export default function Sidebar({
 
       <aside
         ref={sidebarRef}
-        className={`fixed left-0 top-0 z-50 h-screen border-r border-border bg-surface transition-all duration-300 ease-in-out
+        className={`fixed left-0 top-0 z-50 h-screen lg:top-16 lg:z-40 lg:h-[calc(100vh-4rem)] border-r border-border bg-surface transition-all duration-300 ease-in-out
           ${isMobileOpen ? "translate-x-0 w-72" : "-translate-x-full lg:translate-x-0"}
           ${isCollapsed ? "lg:w-20" : "lg:w-64"}
         `}
       >
         <div className="flex h-full flex-col">
-          {/* Logo / Header Area */}
-          <div className="flex h-16 items-center justify-between px-6">
-            <span
-              className={`text-xl font-bold text-brand-accent transition-opacity ${isCollapsed && !isMobileOpen ? "lg:opacity-0" : "opacity-100"}`}
-            >
-              JOBPORTAL
-            </span>
+          {/* Logo / Header Area (Mobile Only) */}
+          <div className="flex h-16 items-center justify-between px-6 lg:hidden border-b border-border">
+            <Link href="/" className="flex items-center gap-2">
+              <Image
+                src="/favicon.png"
+                alt="EasyJobs Logo"
+                width={32}
+                height={32}
+                className="w-8 h-auto"
+              />
+              <span className="text-lg font-bold text-text-primary tracking-tight">
+                Easy<span className="text-brand-primary">Jobs</span>
+              </span>
+            </Link>
             <button
               onClick={() => setIsMobileOpen(false)}
-              className="lg:hidden"
             >
               <X size={20} className="text-muted" />
             </button>
@@ -377,6 +383,20 @@ export default function Sidebar({
                 className={isCollapsed && !isMobileOpen ? "lg:hidden" : "block"}
               >
                 Logout
+              </span>
+            </button>
+
+            <button
+              onClick={toggleTheme}
+              className={`mt-2 flex w-full items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-text-secondary transition-colors hover:bg-surface-hover ${
+                isCollapsed && !isMobileOpen ? "lg:justify-center" : ""
+              }`}
+            >
+              {isDark ? <Sun size={20} /> : <Moon size={20} />}
+              <span
+                className={isCollapsed && !isMobileOpen ? "lg:hidden" : "block"}
+              >
+                {isDark ? "Light Mode" : "Dark Mode"}
               </span>
             </button>
           </div>

@@ -57,10 +57,7 @@ export default function NewJobPage() {
 
   const description = watch("description");
 
-  const {
-    data: credits,
-    isLoading: isCreditsLoading,
-  } = useQuery({
+  const { data: credits, isLoading: isCreditsLoading } = useQuery({
     queryKey: ["recruiter-credits"],
     queryFn: recruiterService.getCredits,
   });
@@ -95,7 +92,7 @@ export default function NewJobPage() {
     return (
       <div className="flex h-64 flex-col items-center justify-center gap-4">
         <Loader2 className="h-8 w-8 animate-spin text-brand-primary" />
-        <p className="text-gray-600 animate-pulse">
+        <p className="text-text-secondary animate-pulse">
           Verifying your job credits...
         </p>
       </div>
@@ -106,7 +103,7 @@ export default function NewJobPage() {
     const finalData = {
       ...data,
       noOfOpenings: parseInt(data.noOfOpenings),
-      requiredDocuments: requiredDocs
+      requiredDocuments: requiredDocs,
     };
     // Save pending job data to local storage to be processed after successful payment
     localStorage.setItem("pending_job_data", JSON.stringify(finalData));
@@ -118,26 +115,26 @@ export default function NewJobPage() {
       <div className="flex items-center gap-4">
         <Link
           href="/dashboard/recruiter/jobs"
-          className="rounded-lg p-2 text-gray-500 hover:bg-gray-100"
+          className="rounded-lg p-2 text-text-secondary hover:bg-surface-hover"
         >
           <ArrowLeft size={20} />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-gray-900">Post New Job</h1>
-          <p className="text-gray-600">Create a new job listing</p>
+          <h1 className="text-2xl font-bold text-text-primary">Post New Job</h1>
+          <p className="text-text-secondary">Create a new job listing</p>
         </div>
       </div>
 
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="rounded-xl border border-gray-200 bg-white p-6 shadow-sm"
+        className="rounded-xl border border-border bg-surface p-6 shadow-sm"
       >
         <div className="space-y-4">
           <FormField label="Job Title" error={errors.title} required>
             <input
               type="text"
               {...register("title")}
-              className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+              className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
               placeholder="Senior Frontend Developer"
             />
           </FormField>
@@ -160,7 +157,7 @@ export default function NewJobPage() {
               <input
                 type="text"
                 {...register("location")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="Remote, New York, NY"
               />
             </FormField>
@@ -169,7 +166,7 @@ export default function NewJobPage() {
               <input
                 type="text"
                 {...register("salary")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="Rs 50000"
               />
             </FormField>
@@ -177,7 +174,7 @@ export default function NewJobPage() {
             <FormField label="Status" error={errors.status}>
               <select
                 {...register("status")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
               >
                 <option value="OPEN">Open</option>
                 <option value="CLOSED">Closed</option>
@@ -188,36 +185,45 @@ export default function NewJobPage() {
               <input
                 type="date"
                 {...register("deadline")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
               />
             </FormField>
 
-            <FormField label="Number of Openings" error={errors.noOfOpenings} required>
+            <FormField
+              label="Number of Openings"
+              error={errors.noOfOpenings}
+              required
+            >
               <input
                 type="number"
                 {...register("noOfOpenings")}
-                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="w-full rounded-lg border border-border bg-surface px-4 py-2.5 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
                 placeholder="5"
               />
             </FormField>
           </div>
 
-          <div className="space-y-4 rounded-lg border border-gray-100 bg-gray-50 p-4">
-            <h3 className="font-medium text-gray-900">Required Documents</h3>
-            <p className="text-sm text-gray-500">Add documents that seekers must upload when applying (e.g., ID Card, Citizenship, Transcript)</p>
-            
+          <div className="space-y-4 rounded-lg border border-border bg-surface-hover p-4">
+            <h3 className="font-medium text-text-primary">
+              Required Documents
+            </h3>
+            <p className="text-sm text-text-secondary">
+              Add documents that seekers must upload when applying (e.g., ID
+              Card, Citizenship, Transcript)
+            </p>
+
             <div className="flex gap-2">
               <input
                 type="text"
                 value={newDocName}
                 onChange={(e) => setNewDocName(e.target.value)}
                 placeholder="Document name (e.g. Citizenship)"
-                className="flex-1 rounded-lg border border-gray-300 px-4 py-2 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
+                className="flex-1 rounded-lg border border-border bg-surface px-4 py-2 focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
               />
               <button
                 type="button"
                 onClick={addRequiredDoc}
-                className="rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white hover:bg-gray-800"
+                className="rounded-lg bg-brand-primary px-4 py-2 text-sm font-medium text-white hover:bg-brand-primary-hover"
               >
                 Add
               </button>
@@ -225,8 +231,13 @@ export default function NewJobPage() {
 
             <div className="space-y-2">
               {requiredDocs.map((docName, index) => (
-                <div key={index} className="flex items-center justify-between rounded-lg bg-white p-3 border border-gray-200">
-                  <span className="text-sm font-medium text-gray-700">{docName}</span>
+                <div
+                  key={index}
+                  className="flex items-center justify-between rounded-lg bg-surface p-3 border border-border"
+                >
+                  <span className="text-sm font-medium text-text-secondary">
+                    {docName}
+                  </span>
                   <button
                     type="button"
                     onClick={() => removeRequiredDoc(index)}
@@ -237,16 +248,18 @@ export default function NewJobPage() {
                 </div>
               ))}
               {requiredDocs.length === 0 && (
-                <p className="text-center text-sm text-gray-400 py-2">No documents required yet</p>
+                <p className="text-center text-sm text-text-muted py-2">
+                  No documents required yet
+                </p>
               )}
             </div>
           </div>
         </div>
 
-        <div className="mt-6 flex items-center justify-end gap-3 border-t border-gray-200 pt-6">
+        <div className="mt-6 flex items-center justify-end gap-3 border-t border-border pt-6">
           <Link
             href="/dashboard/recruiter/jobs"
-            className="rounded-lg px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-100"
+            className="rounded-lg px-4 py-2 text-sm font-medium text-text-secondary hover:bg-surface-hover"
           >
             Cancel
           </Link>
@@ -269,7 +282,7 @@ export default function NewJobPage() {
 function FormField({ label, error, required, children }) {
   return (
     <div>
-      <label className="mb-1.5 flex items-center gap-1 text-sm font-medium text-gray-700">
+      <label className="mb-1.5 flex items-center gap-1 text-sm font-medium text-text-secondary">
         {label}
         {required && <span className="text-red-500">*</span>}
       </label>

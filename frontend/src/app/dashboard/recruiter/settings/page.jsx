@@ -43,12 +43,6 @@ export default function RecruiterSettings() {
               Recruiter
             </span>
           </div>
-          <div className="flex items-center justify-between py-3">
-            <div>
-              <p className="font-medium text-foreground">User ID</p>
-              <p className="text-sm text-secondary">{user?.userId || "Not available"}</p>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -68,23 +62,6 @@ export default function RecruiterSettings() {
           className="rounded-lg bg-surface-hover px-4 py-2 text-sm font-medium text-foreground hover:bg-border transition-colors"
         >
           Change Password
-        </button>
-      </div>
-
-      <div className="rounded-xl border border-red-200 bg-red-50 p-6">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600">
-            <AlertTriangle size={20} />
-          </div>
-          <div>
-            <p className="font-semibold text-red-900">Danger Zone</p>
-            <p className="text-sm text-red-700">Irreversible actions</p>
-          </div>
-        </div>
-
-        <button className="flex items-center gap-2 rounded-lg border border-red-300 bg-white px-4 py-2 text-sm font-medium text-red-600 hover:bg-red-50">
-          <Trash2 size={16} />
-          Delete Account
         </button>
       </div>
 

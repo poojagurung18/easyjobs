@@ -105,7 +105,7 @@ const TiptapTextBlock = forwardRef(
       editorProps: {
         attributes: {
           class:
-            "w-full min-h-[450px] outline-none border border-slate-200 rounded-b-xl p-6 bg-white text-foreground leading-relaxed font-mukta tiptap-editor ProseMirror",
+            "w-full min-h-[450px] outline-none border border-border rounded-b-xl p-6 bg-surface text-foreground leading-relaxed font-mukta tiptap-editor ProseMirror",
         },
       },
       onUpdate: ({ editor }) => {
@@ -323,35 +323,35 @@ const TiptapTextBlock = forwardRef(
             border-left: 4px solid var(--primary);
             padding: 1rem 1.5rem;
             margin: 1.5rem 0;
-            background: #10192a;
+            background: var(--surface-hover);
             font-style: italic;
-            color: #cbd5e1;
+            color: var(--text-secondary);
             border-radius: 0 0.5rem 0.5rem 0;
           }
           .tiptap-editor table {
             border-collapse: collapse;
             width: 100%;
             margin: 1.5rem 0;
-            border: 1px solid #29354d;
+            border: 1px solid var(--border);
             border-radius: 0.5rem;
             overflow: hidden;
           }
           .tiptap-editor th,
           .tiptap-editor td {
-            border: 1px solid #29354d;
+            border: 1px solid var(--border);
             padding: 0.75rem;
             min-width: 100px;
             color: var(--foreground) !important;
           }
           .tiptap-editor th {
-            background-color: #10192a;
+            background-color: var(--surface-hover);
             font-weight: 700;
             text-align: left;
             color: var(--foreground) !important;
           }
           .tiptap-editor hr {
             border: none;
-            border-top: 2px solid #29354d;
+            border-top: 2px solid var(--border);
             margin: 2rem 0;
           }
           .tiptap-editor a {
@@ -383,22 +383,22 @@ const TiptapTextBlock = forwardRef(
           }
         `}</style>
 
-        <div className="w-full flex flex-col border border-slate-200 rounded-xl shadow-sm relative bg-white">
+        <div className="w-full flex flex-col border border-border rounded-xl shadow-sm relative bg-surface">
           {/* Toolbar */}
-          <div className="flex flex-wrap items-center gap-1 bg-gray-50 p-3 border-b border-gray-200 text-gray-600 relative z-[50]">
+          <div className="flex flex-wrap items-center gap-1 bg-surface-hover p-3 border-b border-border text-text-secondary relative z-[50]">
             {/* Heading Dropdown (H1 - H6) */}
             <div className="relative">
               <button
                 type="button"
                 onClick={() => setShowHeadingMenu(!showHeadingMenu)}
-                className="p-2 rounded-lg flex items-center gap-1 hover:bg-gray-100 text-gray-600 transition-all font-medium"
+                className="p-2 rounded-lg flex items-center gap-1 hover:bg-surface text-text-secondary transition-all font-medium"
               >
                 <Heading2 size={18} />
                 <ChevronDown size={12} />
               </button>
 
               {showHeadingMenu && (
-                <div className="absolute z-[9999] top-12 left-0 bg-white border border-slate-200 shadow-xl rounded-xl p-2 min-w-[160px] animate-in fade-in zoom-in duration-200 flex flex-col gap-1">
+                <div className="absolute z-[9999] top-12 left-0 bg-surface border border-border shadow-xl rounded-xl p-2 min-w-[160px] animate-in fade-in zoom-in duration-200 flex flex-col gap-1">
                   {[1, 2, 3, 4, 5, 6].map((level) => (
                     <button
                       key={level}
@@ -411,13 +411,13 @@ const TiptapTextBlock = forwardRef(
                       className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-colors mb-0 ${
                         editor.isActive("heading", { level })
                           ? "bg-brand-primary text-white shadow-sm"
-                          : "text-gray-600 hover:bg-gray-100"
+                          : "text-text-secondary hover:bg-surface-hover"
                       }`}
                     >
                       Heading {level}
                     </button>
                   ))}
-                  <div className="my-1 border-t border-slate-100" />
+                  <div className="my-1 border-t border-border" />
                   <button
                     type="button"
                     onMouseDown={(e) => e.preventDefault()}
@@ -428,7 +428,7 @@ const TiptapTextBlock = forwardRef(
                     className={`w-full text-left px-3 py-2 rounded-lg text-xs transition-colors ${
                       editor.isActive("paragraph")
                         ? "bg-brand-primary text-white shadow-sm"
-                        : "text-gray-600 hover:bg-gray-100"
+                        : "text-text-secondary hover:bg-surface-hover"
                     }`}
                   >
                     Normal Text
@@ -728,7 +728,7 @@ const TiptapTextBlock = forwardRef(
           <BubbleMenu
             editor={editor}
             tippyOptions={{ duration: 100, zIndex: 100000 }}
-            className="bg-white text-slate-700 rounded-xl shadow-2xl p-1.5 flex items-center gap-1 border border-slate-200"
+            className="bg-surface text-text-primary rounded-xl shadow-2xl p-1.5 flex items-center gap-1 border border-border"
           >
             {/* Bubble Menu: Headings Dropdown */}
             <div className="relative">

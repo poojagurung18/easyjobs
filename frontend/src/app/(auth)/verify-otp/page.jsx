@@ -1,7 +1,13 @@
 "use client";
 
 import { useState, useRef, useEffect, Suspense } from "react";
-import { Loader2, ShieldCheck, ArrowLeft, ArrowRight, RefreshCcw } from "lucide-react";
+import {
+  Loader2,
+  ShieldCheck,
+  ArrowLeft,
+  ArrowRight,
+  RefreshCcw,
+} from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { useAuth } from "@/context/AuthContext";
@@ -12,8 +18,8 @@ export default function VerifyOtpPage() {
   return (
     <Suspense
       fallback={
-        <div className="min-h-screen flex text-gray-900 items-center justify-center">
-          <Loader2 className="animate-spin w-8 h-8" />
+        <div className="min-h-screen flex text-text-primary items-center justify-center">
+          <Loader2 className="animate-spin w-8 h-8 text-brand-primary" />
         </div>
       }
     >
@@ -27,9 +33,14 @@ function VerifyOtpContent() {
   const [isLoading, setIsLoading] = useState(false);
   const [timer, setTimer] = useState(30);
   const [canResend, setCanResend] = useState(false);
-  
+
   const inputRefs = [
-    useRef(), useRef(), useRef(), useRef(), useRef(), useRef()
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
   ];
 
   const { verifyOtp } = useAuth();
@@ -87,7 +98,7 @@ function VerifyOtpContent() {
       if (i < 6) newOtp[i] = char;
     });
     setOtp(newOtp);
-    
+
     // Focus last filled or next empty
     const nextIndex = pastedData.length < 6 ? pastedData.length : 5;
     inputRefs[nextIndex].current.focus();
@@ -104,14 +115,14 @@ function VerifyOtpContent() {
     setIsLoading(true);
     try {
       const response = await verifyOtp(email, otpCode);
-      
+
       if (type === "registration") {
         toast.success("Account verified successfully!");
-        
+
         // Redirect based on role
         const role = response.role;
         let targetPath = "/dashboard";
-        
+
         if (role === "ADMIN") {
           targetPath = "/dashboard/admin";
         } else if (role === "JOB_RECRUITER") {
@@ -119,7 +130,7 @@ function VerifyOtpContent() {
         } else if (role === "JOB_SEEKER") {
           targetPath = "/dashboard/seeker";
         }
-        
+
         router.push(targetPath);
       } else {
         toast.success("Identity verified!");
@@ -143,28 +154,11 @@ function VerifyOtpContent() {
 
   return (
     <div className="relative min-h-screen flex items-center justify-center py-12 px-4">
-      {/* Horizontal Background Split */}
-      <div className="absolute inset-0 flex flex-col pointer-events-none">
-        <div className="h-1/2 bg-white" />
-        <div className="h-1/2 bg-[#0f202d]" />
-      </div>
+      <div className="absolute inset-0 bg-background pointer-events-none" />
 
       <div className="w-full max-w-md relative z-10">
-        {/* Logo */}
-        <div className="flex items-center justify-center gap-2.5 mb-8">
-          <Image
-            src="/favicon.png"
-            alt="EasyJobs Logo"
-            width={60}
-            height={90}
-          />
-          <span className="text-lg font-extrabold text-brand-primary tracking-tight">
-            Easy<span className="text-brand-primary">Jobs</span>
-          </span>
-        </div>
-
         {/* Card */}
-        <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl overflow-hidden">
+        <div className="bg-surface rounded-3xl border border-border shadow-2xl overflow-hidden">
           <div className="h-1.5 w-full bg-brand-primary" />
 
           <div className="px-8 py-10 sm:px-10">
@@ -175,8 +169,9 @@ function VerifyOtpContent() {
               <h1 className="text-3xl font-black text-brand-primary tracking-tight">
                 Two-Step Verification
               </h1>
-              <p className="text-gray-500 text-sm mt-2">
-                We've sent a 6-digit code to <span className="font-bold text-brand-primary">{email}</span>
+              <p className="text-text-secondary text-sm mt-2">
+                We've sent a 6-digit code to{" "}
+                <span className="font-bold text-brand-primary">{email}</span>
               </p>
             </div>
 
@@ -192,7 +187,7 @@ function VerifyOtpContent() {
                     onChange={(e) => handleChange(index, e.target.value)}
                     onKeyDown={(e) => handleKeyDown(index, e)}
                     onPaste={handlePaste}
-                    className="w-full h-14 text-center text-xl font-bold bg-gray-50 border border-gray-200 rounded-xl focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/5 outline-none transition-all"
+                    className="w-full h-14 text-center text-xl font-bold bg-surface-hover border border-border rounded-xl focus:border-brand-primary focus:ring-4 focus:ring-brand-primary/5 outline-none transition-all"
                   />
                 ))}
               </div>
@@ -217,7 +212,7 @@ function VerifyOtpContent() {
                 </button>
 
                 <div className="flex flex-col items-center gap-4">
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-text-secondary">
                     Didn't receive the code?{" "}
                     {canResend ? (
                       <button
@@ -229,7 +224,7 @@ function VerifyOtpContent() {
                         Resend now
                       </button>
                     ) : (
-                      <span className="text-gray-400 font-medium">
+                      <span className="text-text-muted font-medium">
                         Resend in {timer}s
                       </span>
                     )}
@@ -237,7 +232,7 @@ function VerifyOtpContent() {
 
                   <Link
                     href="/login"
-                    className="text-xs font-bold text-gray-400 hover:text-brand-primary flex items-center gap-1 transition-colors"
+                    className="text-xs font-bold text-text-muted hover:text-brand-primary flex items-center gap-1 transition-colors"
                   >
                     <ArrowLeft size={14} />
                     Back to login

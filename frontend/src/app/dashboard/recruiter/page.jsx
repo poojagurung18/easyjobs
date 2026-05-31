@@ -90,7 +90,6 @@ export default function RecruiterDashboard() {
         <StatCard label="Active Jobs" value={stats.activeJobs} icon={Briefcase} color="blue" />
         <StatCard label="Total Jobs" value={stats.totalJobs} icon={Briefcase} color="purple" />
         <StatCard label="Total Applicants" value={stats.totalApplicants} icon={Users} color="green" />
-        <StatCard label="Profile Views" value={stats.profileViews} icon={Eye} color="pink" />
         <StatCard label="Job Credits" value={credits || 0} icon={CreditCard} color="green" />
       </div>
 

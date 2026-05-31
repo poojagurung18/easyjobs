@@ -66,11 +66,11 @@ export default function ChatDashboard({ role }) {
   const isSeeker = role === "seeker";
 
   return (
-    <div className="flex h-[calc(100vh-10rem)] rounded-xl border border-gray-200 bg-white overflow-hidden shadow-sm">
+    <div className="flex h-[calc(100vh-10rem)] rounded-xl border border-border bg-surface overflow-hidden shadow-sm">
       {/* Sidebar - Chat Rooms List */}
-      <div className="w-1/3 border-r border-gray-200 bg-gray-50 flex flex-col">
-        <div className="p-4 border-b border-gray-200 bg-white">
-          <h2 className="text-lg font-bold text-gray-900">Messages</h2>
+      <div className="w-1/3 border-r border-border bg-surface-hover flex flex-col">
+        <div className="p-4 border-b border-border bg-surface">
+          <h2 className="text-lg font-bold text-text-primary">Messages</h2>
         </div>
         
         <div className="flex-1 overflow-y-auto">
@@ -79,8 +79,8 @@ export default function ChatDashboard({ role }) {
               <Loader2 className="h-6 w-6 animate-spin text-brand-primary" />
             </div>
           ) : rooms?.length === 0 ? (
-            <div className="p-8 text-center text-gray-500">
-              <MessageSquare className="h-10 w-10 mx-auto mb-2 text-gray-400" />
+            <div className="p-8 text-center text-text-secondary">
+              <MessageSquare className="h-10 w-10 mx-auto mb-2 text-text-muted" />
               <p>No active conversations</p>
             </div>
           ) : (
@@ -88,12 +88,12 @@ export default function ChatDashboard({ role }) {
               <button
                 key={room.id}
                 onClick={() => setActiveRoom(room)}
-                className={`w-full text-left p-4 border-b border-gray-100 transition-colors hover:bg-gray-100 ${
-                  activeRoom?.id === room.id ? "bg-brand-light/30 border-l-4 border-l-brand-primary" : ""
+                className={`w-full text-left p-4 border-b border-border transition-colors hover:bg-surface-hover ${
+                  activeRoom?.id === room.id ? "bg-brand-light/10 border-l-4 border-l-brand-primary" : ""
                 }`}
               >
                 <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 shrink-0 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 overflow-hidden">
+                  <div className="h-10 w-10 shrink-0 rounded-full bg-surface flex items-center justify-center text-text-secondary overflow-hidden border border-border">
                     {room.otherPartyAvatar ? (
                       <img src={room.otherPartyAvatar} alt="avatar" className="h-full w-full object-cover" />
                     ) : (
@@ -101,8 +101,8 @@ export default function ChatDashboard({ role }) {
                     )}
                   </div>
                   <div className="min-w-0 flex-1">
-                    <p className="font-semibold text-gray-900 truncate">{room.otherPartyName}</p>
-                    <p className="text-xs text-gray-500 truncate">{room.jobTitle}</p>
+                    <p className="font-semibold text-text-primary truncate">{room.otherPartyName}</p>
+                    <p className="text-xs text-text-secondary truncate">{room.jobTitle}</p>
                   </div>
                 </div>
               </button>
@@ -112,13 +112,13 @@ export default function ChatDashboard({ role }) {
       </div>
 
       {/* Main Chat Area */}
-      <div className="w-2/3 flex flex-col bg-white">
+      <div className="w-2/3 flex flex-col bg-surface">
         {activeRoom ? (
           <>
             {/* Chat Header */}
-            <div className="p-4 border-b border-gray-200 flex items-center justify-between bg-white z-10 shadow-sm">
+            <div className="p-4 border-b border-border flex items-center justify-between bg-surface z-10 shadow-sm">
               <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center text-gray-500 overflow-hidden">
+                <div className="h-10 w-10 rounded-full bg-surface-hover flex items-center justify-center text-text-secondary overflow-hidden border border-border">
                   {activeRoom.otherPartyAvatar ? (
                     <img src={activeRoom.otherPartyAvatar} alt="avatar" className="h-full w-full object-cover" />
                   ) : (
@@ -126,7 +126,7 @@ export default function ChatDashboard({ role }) {
                   )}
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900">{activeRoom.otherPartyName}</h3>
+                  <h3 className="font-bold text-text-primary">{activeRoom.otherPartyName}</h3>
                   <p className="text-xs text-brand-primary">{activeRoom.jobTitle}</p>
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function ChatDashboard({ role }) {
             </div>
 
             {/* Chat Messages */}
-            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50/50">
+            <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-background">
               {isLoadingMessages ? (
                 <div className="flex h-full items-center justify-center">
                   <Loader2 className="h-8 w-8 animate-spin text-brand-primary" />
@@ -153,11 +153,11 @@ export default function ChatDashboard({ role }) {
                         className={`max-w-[70%] rounded-2xl px-4 py-2 ${
                           isMine
                             ? "bg-brand-primary text-white rounded-br-none"
-                            : "bg-gray-200 text-gray-900 rounded-bl-none"
+                            : "bg-surface-hover text-text-primary border border-border rounded-bl-none"
                         }`}
                       >
                         <p className="text-sm">{msg.content}</p>
-                        <span className={`text-[10px] mt-1 block ${isMine ? "text-blue-100" : "text-gray-500"}`}>
+                        <span className={`text-[10px] mt-1 block ${isMine ? "text-blue-100" : "text-text-muted"}`}>
                           {new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                         </span>
                       </div>
@@ -169,14 +169,14 @@ export default function ChatDashboard({ role }) {
             </div>
 
             {/* Input Area */}
-            <div className="p-4 border-t border-gray-200 bg-white">
+            <div className="p-4 border-t border-border bg-surface">
               <form onSubmit={handleSendMessage} className="flex gap-2">
                 <input
                   type="text"
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
                   placeholder="Type a message..."
-                  className="flex-1 rounded-full border border-gray-300 px-4 py-2 text-sm focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary"
+                  className="flex-1 rounded-full border border-border bg-surface px-4 py-2 text-sm text-text-primary focus:outline-none focus:border-brand-primary focus:ring-1 focus:ring-brand-primary placeholder:text-text-muted"
                   disabled={!isConnected}
                 />
                 <button
@@ -190,7 +190,7 @@ export default function ChatDashboard({ role }) {
             </div>
           </>
         ) : (
-          <div className="flex h-full flex-col items-center justify-center text-gray-400">
+          <div className="flex h-full flex-col items-center justify-center text-text-muted">
             <MessageSquare size={48} className="mb-4 opacity-20" />
             <p>Select a chat to start messaging</p>
           </div>

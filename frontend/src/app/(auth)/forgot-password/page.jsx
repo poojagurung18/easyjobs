@@ -49,22 +49,6 @@ export default function ForgotPasswordPage() {
       </div>
 
       <div className="w-full max-w-md relative z-10">
-        {/* Logo */}
-        <Link
-          href="/"
-          className="flex items-center justify-center gap-2.5 mb-8"
-        >
-          <Image
-            src="/favicon.png"
-            alt="EasyJobs Logo"
-            width={60}
-            height={90}
-          />
-          <span className="text-lg font-extrabold text-brand-primary tracking-tight">
-            Easy<span className="text-brand-primary">Jobs</span>
-          </span>
-        </Link>
-
         {/* Card */}
         <div className="bg-white rounded-3xl border border-gray-100 shadow-2xl overflow-hidden">
           <div className="h-1.5 w-full bg-brand-primary" />

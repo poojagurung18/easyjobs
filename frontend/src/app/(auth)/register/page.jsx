@@ -80,22 +80,6 @@ export default function RegisterPage() {
       <div className="absolute inset-0 pointer-events-none" />
 
       <div className="w-full max-w-xl relative z-10">
-        {/* Logo — above the card */}
-          <Link
-            href="/"
-            className="flex items-center justify-center gap-2.5 mb-6"
-          >
-            <Image
-              src="/favicon.png"
-              alt="EasyJobs Logo"
-              width={50}
-              height={75}
-            />
-            <span className="text-lg font-extrabold text-brand-primary tracking-tight">
-              Easy<span className="text-brand-primary">Jobs</span>
-            </span>
-          </Link>
-
           {/* Card */}
         <div className="bg-surface rounded-3xl border border-border shadow-2xl overflow-hidden">
           {/* Top accent bar using brand color */}

@@ -5,6 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { recruiterService } from "@/lib/api/recruiter";
+import { paymentService } from "@/lib/api/payment";
 import { useRouter, useParams } from "next/navigation";
 import { Loader2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
@@ -17,6 +18,7 @@ const jobSchema = z.object({
   location: z.string().min(2, "Location is required"),
   salary: z.string().optional(),
   status: z.enum(["OPEN", "CLOSED"]),
+  deadline: z.string().min(1, "Deadline is required"),
 });
 
 export default function EditJobPage() {
@@ -47,6 +49,7 @@ export default function EditJobPage() {
         location: job.location,
         salary: job.salary || "",
         status: job.status,
+        deadline: job.deadline || "",
       }
       : {},
   });
@@ -65,8 +68,27 @@ export default function EditJobPage() {
     },
   });
 
+  const handleBuyCredits = async () => {
+    try {
+      toast.loading("Preparing payment...", { id: "payment" });
+      const response = await paymentService.createPayment();
+      if (response.paymentLink) {
+        window.location.href = response.paymentLink;
+      } else {
+        throw new Error("Payment link not found");
+      }
+    } catch (error) {
+      toast.error("Failed to initiate payment", { id: "payment" });
+    }
+  };
+
   const onSubmit = (data) => {
-    mutation.mutate(data);
+    if (job.status === "CLOSED" && data.status === "OPEN") {
+      localStorage.setItem("pending_job_update", JSON.stringify({ jobId, data }));
+      handleBuyCredits();
+    } else {
+      mutation.mutate(data);
+    }
   };
 
   if (jobsLoading) {
@@ -157,6 +179,14 @@ export default function EditJobPage() {
                 <option value="OPEN">Open</option>
                 <option value="CLOSED">Closed</option>
               </select>
+            </FormField>
+
+            <FormField label="Deadline" error={errors.deadline} required>
+              <input
+                type="date"
+                {...register("deadline")}
+                className="w-full rounded-lg border border-gray-300 px-4 py-2.5 focus:border-gray-950 focus:outline-none focus:ring-2 focus:ring-gray-950/20"
+              />
             </FormField>
           </div>
         </div>

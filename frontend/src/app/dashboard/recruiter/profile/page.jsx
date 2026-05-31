@@ -34,7 +34,7 @@ const profileSchema = z.object({
   companyWebsite: z.string().url("Valid website URL is required").optional().or(z.literal("")),
   companyAddress: z.string().min(5, "Address is required"),
   industryType: z.string().min(1, "Industry type is required"),
-  panNumber: z.string().min(10, "Valid PAN number is required"),
+  panNumber: z.string().min(6, "Valid PAN number is required"),
   description: z.string().min(50, "Description must be at least 50 characters"),
 });
 
@@ -329,7 +329,7 @@ export default function RecruiterProfile() {
                 type="text"
                 {...register("panNumber")}
                 className="w-full rounded-lg border border-border bg-background px-4 py-2.5 text-foreground focus:border-brand-primary focus:outline-none focus:ring-2 focus:ring-brand-primary/20"
-                placeholder="ABCDE1234F"
+                placeholder="12345678"
               />
             </FormField>
 

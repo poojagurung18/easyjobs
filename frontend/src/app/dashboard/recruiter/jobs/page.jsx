@@ -37,6 +37,8 @@ export default function RecruiterJobs() {
 
   useEffect(() => {
     const pendingData = localStorage.getItem("pending_job_data");
+    const pendingUpdate = localStorage.getItem("pending_job_update");
+
     if (pendingData && !processingRef.current) {
       processingRef.current = true;
       try {
@@ -67,6 +69,36 @@ export default function RecruiterJobs() {
 
       } catch (e) {
         localStorage.removeItem("pending_job_data");
+        processingRef.current = false;
+      }
+    } else if (pendingUpdate && !processingRef.current) {
+      processingRef.current = true;
+      try {
+        const { jobId, data } = JSON.parse(pendingUpdate);
+        toast.loading("Finalizing your job update...", { id: "pending-job" });
+
+        const attemptUpdate = (isRetry = false) => {
+          recruiterService.updateJob(jobId, data)
+            .then(() => {
+              queryClient.invalidateQueries(["recruiter-jobs"]);
+              toast.success("Job updated successfully!", { id: "pending-job" });
+              localStorage.removeItem("pending_job_update");
+            })
+            .catch((error) => {
+              const message = error.response?.data?.message || "";
+              if (!isRetry && message.includes("credits")) {
+                setTimeout(() => attemptUpdate(true), 5000);
+              } else {
+                toast.error(message || "Failed to finalize job update.", { id: "pending-job" });
+                localStorage.removeItem("pending_job_update");
+              }
+            });
+        };
+
+        setTimeout(() => attemptUpdate(false), 5000);
+
+      } catch (e) {
+        localStorage.removeItem("pending_job_update");
         processingRef.current = false;
       }
     }

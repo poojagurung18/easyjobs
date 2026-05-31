@@ -5,7 +5,7 @@ export default function CTABanner() {
     <section className="bg-background py-20">
       <div className="max-w-7xl mx-auto px-6">
         <div className="teal-gradient rounded-[2.5rem] px-10 py-20 text-center relative overflow-hidden shadow-2xl">
-          <div className="absolute inset-0 bg-black/10 pointer-events-none"></div>
+          <div className="absolute inset-0 bg-black/50 pointer-events-none"></div>
 
           <h2 className="text-4xl md:text-5xl font-black text-white tracking-tight mb-6 relative z-10">
             Ready to Take the Next Step?

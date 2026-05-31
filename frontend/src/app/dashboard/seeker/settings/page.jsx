@@ -118,37 +118,8 @@ export default function SeekerSettings() {
                   />
                 </button>
               </div>
-
-              {/* Email Notifications Toggle */}
-              <div className="flex items-center justify-between py-4">
-                <div className="flex items-center gap-4">
-                  <div className="p-2 rounded-xl bg-blue-50 text-blue-600">
-                    <Globe size={20} />
-                  </div>
-                  <div>
-                    <p className="font-bold text-foreground">Email Notifications</p>
-                    <p className="text-sm text-secondary">Receive job alerts and application updates</p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => setEmailNotifications(!emailNotifications)}
-                  className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors focus:outline-none ${emailNotifications ? "bg-brand-primary" : "bg-surface-hover"}`}
-                >
-                  <span
-                    className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform shadow ${emailNotifications ? "translate-x-6" : "translate-x-1"}`}
-                  />
-                </button>
-              </div>
             </div>
           </section>
-
-          {/* Danger Zone */}
-          <div className="p-4 rounded-2xl bg-rose-50 border border-rose-100 flex items-center justify-between">
-            <p className="text-sm font-bold text-rose-700 px-2">Need to deactivate your account?</p>
-            <button className="text-sm font-bold text-rose-600 hover:underline px-2 transition-all active:opacity-70">
-              Learn how
-            </button>
-          </div>
         </div>
       </div>
 

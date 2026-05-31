@@ -22,7 +22,6 @@ export default function HomePage() {
       <Features />
       <HowItWorks />
       <TrustSection />
-      <Testimonials />
       <CTABanner />
       <Footer />
     </main>

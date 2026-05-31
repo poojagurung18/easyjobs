@@ -39,27 +39,6 @@ export default function Hero() {
                 Learn More
               </Link>
             </div>
-
-            <div className="mt-16 grid grid-cols-3 gap-8 py-8 px-6 bg-foreground/5 border border-border rounded-2xl backdrop-blur-md max-w-lg">
-              <div>
-                <p className="text-3xl font-black text-primary">2.5k+</p>
-                <p className="text-[10px] text-brand-secondary uppercase font-black tracking-widest mt-1">
-                  Jobs Live
-                </p>
-              </div>
-              <div className="border-x border-border px-4">
-                <p className="text-3xl font-black text-primary">800+</p>
-                <p className="text-[10px] text-brand-secondary uppercase font-black tracking-widest mt-1">
-                  Partners
-                </p>
-              </div>
-              <div>
-                <p className="text-3xl font-black text-primary">12k+</p>
-                <p className="text-[10px] text-brand-secondary uppercase font-black tracking-widest mt-1">
-                  Success
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Right — Visual */}

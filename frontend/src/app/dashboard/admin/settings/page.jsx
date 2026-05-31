@@ -104,26 +104,6 @@ export default function AdminSettings() {
         </div>
       </div>
 
-      <div className="rounded-xl border border-red-200 bg-red-50 p-6">
-        <div className="mb-6 flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-red-100 text-red-600">
-            <AlertTriangle size={20} />
-          </div>
-          <div>
-            <p className="font-semibold text-red-900">Danger Zone</p>
-            <p className="text-sm text-red-700">Irreversible and destructive actions</p>
-          </div>
-        </div>
-
-        <button
-          onClick={() => setIsDeleteModalOpen(true)}
-          className="flex items-center gap-2 rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700"
-        >
-          <Trash2 size={16} />
-          Delete My Admin Account
-        </button>
-      </div>
-
       <ConfirmModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
